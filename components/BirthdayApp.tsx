@@ -143,6 +143,7 @@ export default function BirthdayApp() {
   // Foto: File para subir, string para preview (URL o base64)
   const [formPhotoFile, setFormPhotoFile] = useState<File | null>(null)
   const [formPhotoPreview, setFormPhotoPreview] = useState<string | null>(null)
+  const [formPhotoRemoved, setFormPhotoRemoved] = useState(false)
   const [isDragging, setIsDragging]   = useState(false)
 
   const [searchAdminQuery, setSearchAdminQuery] = useState('')
@@ -282,11 +283,24 @@ export default function BirthdayApp() {
   }
 
   // ── Foto handlers ───────────────────────────────────────────
-  const handlePhotoSelect = (file: File) => {
+  const handlePhotoSelect = async (file: File) => {
     setFormPhotoFile(file)
+    setFormPhotoRemoved(false)
     const reader = new FileReader()
     reader.onloadend = () => setFormPhotoPreview(reader.result as string)
     reader.readAsDataURL(file)
+
+    // Auto-guardar foto si estamos editando una persona existente
+    if (isEditing && editingPersonId !== null) {
+      try {
+        const foto_url = await db.uploadFoto(editingPersonId, file)
+        await db.updateFotoUrl(editingPersonId, foto_url)
+        setTeam(prev => prev.map(p => p.id === editingPersonId ? { ...p, foto_url } : p))
+        showNotification('¡Foto guardada!', 'success')
+      } catch {
+        showNotification('Error al guardar foto', 'error')
+      }
+    }
   }
 
   const handleDragOver  = (e: React.DragEvent) => { e.preventDefault(); setIsDragging(true) }
@@ -296,7 +310,6 @@ export default function BirthdayApp() {
     const file = e.dataTransfer.files[0]
     if (file?.type.startsWith('image/')) {
       handlePhotoSelect(file)
-      showNotification('¡Foto cargada!', 'success')
     } else {
       showNotification('Arrastra un archivo de imagen válido', 'error')
     }
@@ -317,9 +330,12 @@ export default function BirthdayApp() {
 
     try {
       if (isEditing && editingPersonId !== null) {
-        // Subir foto si hay una nueva
+        // Subir foto si hay una nueva, o eliminar si se removió
         let foto_url = team.find(p => p.id === editingPersonId)?.foto_url ?? null
-        if (formPhotoFile) {
+        if (formPhotoRemoved) {
+          await db.deleteFoto(editingPersonId)
+          foto_url = null
+        } else if (formPhotoFile) {
           foto_url = await db.uploadFoto(editingPersonId, formPhotoFile)
         }
 
@@ -420,7 +436,7 @@ export default function BirthdayApp() {
     setFormGiftText1(''); setFormGiftLink1('')
     setFormGiftText2(''); setFormGiftLink2('')
     setFormGiftText3(''); setFormGiftLink3('')
-    setFormPhotoFile(null); setFormPhotoPreview(null); setIsDragging(false); setFormExpanded(false)
+    setFormPhotoFile(null); setFormPhotoPreview(null); setFormPhotoRemoved(false); setIsDragging(false); setFormExpanded(false)
   }
 
   // ── Memos ──────────────────────────────────────────────────
@@ -703,10 +719,9 @@ export default function BirthdayApp() {
                               <div className="flex items-start gap-4">
                                 <div className={`w-14 h-16 rounded-2xl bg-gradient-to-tr ${person.color} flex items-center justify-center text-white text-2xl font-extrabold shadow-md overflow-hidden shrink-0`}>
                                   {person.foto_url ? <img src={person.foto_url} className="w-full h-full object-cover" alt="" /> : person.nombre.charAt(0)}
-                                  <span className="absolute -bottom-1 -right-1 text-2xl">{person.emoji_signo}</span>
                                 </div>
                                 <div className="flex-1 space-y-1 overflow-hidden">
-                                  <h3 className="font-black text-lg truncate">{person.nombre}</h3>
+                                  <h3 className="font-black text-lg truncate">{person.nombre} <span>{person.emoji_signo}</span></h3>
                                   <p className="text-xs text-rose-400 font-bold">📅 {person.dia} de {MONTH_NAMES[person.mes-1]} | {person.signo}</p>
                                   <div className="mt-3 p-3 rounded-2xl bg-slate-950/60">
                                     <span className="block text-[8px] font-bold text-slate-400 uppercase mb-1">Regalo Principal:</span>
@@ -719,7 +734,6 @@ export default function BirthdayApp() {
                                   <div className="h-full bg-rose-500" style={{ width: `${(paidCount/Math.max(team.length-1,1))*100}%` }} />
                                 </div>
                                 <div className="flex gap-2">
-                                  <button onClick={() => triggerCelebration(person.id)} className="p-2 rounded-xl bg-rose-500 text-white"><IconParty className="w-4 h-4"/></button>
                                   <button onClick={() => setSelectedPersonId(person.id)} className="px-3 py-2 rounded-xl bg-slate-800 text-slate-200 font-bold text-[11px]">Ver persona</button>
                                 </div>
                               </div>
@@ -819,17 +833,14 @@ export default function BirthdayApp() {
                         <div key={person.id} onClick={() => { playSoundEffect('tap'); setSelectedPersonId(person.id) }}
                           className="p-5 rounded-3xl border bg-slate-900 border-slate-800 hover:bg-slate-850 cursor-pointer flex flex-col justify-between min-h-[220px]">
                           <div className="space-y-4">
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center gap-3">
-                                <div className={`w-10 h-10 rounded-xl bg-gradient-to-tr ${person.color} flex items-center justify-center text-white text-sm font-black shrink-0 overflow-hidden`}>
-                                  {person.foto_url ? <img src={person.foto_url} className="w-full h-full object-cover" alt=""/> : person.nombre.charAt(0)}
-                                </div>
-                                <div>
-                                  <h3 className="text-sm font-extrabold">{person.nombre}</h3>
-                                  <p className="text-[10px] text-slate-400">{person.dia} de {MONTH_NAMES[person.mes-1]}</p>
-                                </div>
+                            <div className="flex items-center gap-3">
+                              <div className={`w-10 h-10 rounded-xl bg-gradient-to-tr ${person.color} flex items-center justify-center text-white text-sm font-black shrink-0 overflow-hidden`}>
+                                {person.foto_url ? <img src={person.foto_url} className="w-full h-full object-cover" alt=""/> : person.nombre.charAt(0)}
                               </div>
-                              <span className="text-xl">{person.emoji_signo}</span>
+                              <div>
+                                <h3 className="text-sm font-extrabold">{person.nombre} <span>{person.emoji_signo}</span></h3>
+                                <p className="text-[10px] text-slate-400">{person.dia} de {MONTH_NAMES[person.mes-1]}</p>
+                              </div>
                             </div>
                             <div className="p-3 rounded-2xl text-[11px] bg-slate-950/80 text-slate-300">
                               <span className="block text-[8px] font-bold text-slate-400 uppercase mb-1">Deseo Principal:</span>
@@ -945,8 +956,21 @@ export default function BirthdayApp() {
                                     {formPhotoPreview?'Cambiar':'Examinar'}
                                   </label>
                                   {formPhotoPreview && (
-                                    <button type="button" onClick={() => { setFormPhotoFile(null); setFormPhotoPreview(null) }}
-                                      className="text-[10px] text-red-400 font-bold hover:underline">Eliminar</button>
+                                    <button type="button" onClick={async () => {
+                                      setFormPhotoFile(null)
+                                      setFormPhotoPreview(null)
+                                      setFormPhotoRemoved(true)
+                                      if (isEditing && editingPersonId !== null) {
+                                        try {
+                                          await db.deleteFoto(editingPersonId)
+                                          await db.updateFotoUrl(editingPersonId, null)
+                                          setTeam(prev => prev.map(p => p.id === editingPersonId ? { ...p, foto_url: null } : p))
+                                          showNotification('Foto eliminada', 'info')
+                                        } catch {
+                                          showNotification('Error al eliminar foto', 'error')
+                                        }
+                                      }
+                                    }} className="text-[10px] text-red-400 font-bold hover:underline">Eliminar foto</button>
                                   )}
                                 </div>
                               </div>

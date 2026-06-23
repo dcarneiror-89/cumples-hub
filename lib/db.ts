@@ -153,6 +153,15 @@ export async function uploadFoto(personaId: number, file: File): Promise<string>
   return `${data.publicUrl}?t=${Date.now()}`
 }
 
+/** Actualiza solo el campo foto_url de una persona */
+export async function updateFotoUrl(id: number, foto_url: string | null): Promise<void> {
+  const { error } = await supabase
+    .from('personas')
+    .update({ foto_url })
+    .eq('id', id)
+  if (error) throw error
+}
+
 /** Elimina la foto de una persona del bucket */
 export async function deleteFoto(personaId: number): Promise<void> {
   // Intenta borrar .jpg, .png, .webp (sin importar extensión)
