@@ -149,6 +149,7 @@ export default function BirthdayApp() {
   const [adminNotification, setAdminNotification] = useState<{msg:string,type:string}|null>(null)
   const [personToDelete, setPersonToDelete] = useState<Persona | null>(null)
   const [isSaving, setIsSaving] = useState(false)
+  const [formExpanded, setFormExpanded] = useState(false)
 
   // ── Cargar datos al montar ──────────────────────────────────
   useEffect(() => {
@@ -419,21 +420,33 @@ export default function BirthdayApp() {
     setFormGiftText1(''); setFormGiftLink1('')
     setFormGiftText2(''); setFormGiftLink2('')
     setFormGiftText3(''); setFormGiftLink3('')
-    setFormPhotoFile(null); setFormPhotoPreview(null); setIsDragging(false)
+    setFormPhotoFile(null); setFormPhotoPreview(null); setIsDragging(false); setFormExpanded(false)
   }
 
   // ── Memos ──────────────────────────────────────────────────
   const globalStats = useMemo(() => {
-    let completados = 0, pendientes = 0, totalRealizados = 0
-    const totalPosibles = team.length * (team.length - 1)
+    const hoy = new Date()
+    const mesHoy = hoy.getMonth() + 1
+    const diaHoy = hoy.getDate()
+
+    const cumpleYaPaso = (mes: number, dia: number) =>
+      mes < mesHoy || (mes === mesHoy && dia <= diaHoy)
+
+    let cumplesPasados = 0, cumplesPorVenir = 0
+    let pagosPendientesEnPasados = 0
+
     team.forEach(p => {
-      if (isFullyPaid(p.id)) completados++; else pendientes++
-      totalRealizados += getPaidCount(p.id)
+      const paso = cumpleYaPaso(p.mes, p.dia)
+      if (paso) {
+        cumplesPasados++
+        const pendientesDeEste = (team.length - 1) - getPaidCount(p.id)
+        pagosPendientesEnPasados += pendientesDeEste
+      } else {
+        cumplesPorVenir++
+      }
     })
-    return {
-      completados, pendientes,
-      porcentaje: totalPosibles > 0 ? Math.round((totalRealizados / totalPosibles) * 100) : 0,
-    }
+
+    return { cumplesPasados, cumplesPorVenir, pagosPendientesEnPasados }
   }, [team, payments])
 
   const currentMonthBirthdays = useMemo(
@@ -471,8 +484,8 @@ export default function BirthdayApp() {
       theme === 'dark' ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-800'
     } flex flex-col md:flex-row`}>
 
-      {/* Sidebar */}
-      <aside className={`w-full md:w-72 shrink-0 border-b md:border-b-0 md:border-r flex flex-col z-30 ${
+      {/* Sidebar — solo desktop */}
+      <aside className={`hidden md:flex md:w-72 shrink-0 md:border-r flex-col z-30 ${
         theme === 'dark' ? 'border-slate-800 bg-slate-900/60' : 'border-slate-200 bg-white'
       }`}>
         <div className="p-6 flex items-center justify-between border-b border-slate-800/10">
@@ -505,8 +518,27 @@ export default function BirthdayApp() {
         </nav>
       </aside>
 
+      {/* Bottom tab bar — solo mobile */}
+      <nav className={`fixed bottom-0 left-0 right-0 md:hidden z-40 border-t ${
+        theme==='dark' ? 'bg-slate-900/95 border-slate-800' : 'bg-white/95 border-slate-200'
+      } backdrop-blur-md`}>
+        <div className="flex items-stretch h-16">
+          {(['home','regalos','planilla'] as const).map(tab => (
+            <button key={tab} onClick={() => { playSoundEffect('tap'); setActiveTab(tab); setSelectedPersonId(null) }}
+              className={`flex-1 flex flex-col items-center justify-center gap-1 text-[10px] font-bold transition-all ${
+                activeTab===tab ? 'text-rose-500' : 'text-slate-500'
+              }`}>
+              {tab==='home'     && <><IconCake className="w-5 h-5"/><span>Inicio</span></>}
+              {tab==='regalos'  && <><IconGift className="w-5 h-5"/><span>Regalos</span></>}
+              {tab==='planilla' && <><IconDatabase className="w-5 h-5"/><span>Planilla</span></>}
+              {activeTab===tab && <span className="absolute bottom-1 w-1 h-1 rounded-full bg-rose-500"/>}
+            </button>
+          ))}
+        </div>
+      </nav>
+
       {/* Main */}
-      <main className="flex-1 flex flex-col min-h-screen overflow-y-auto">
+      <main className="flex-1 flex flex-col min-h-screen overflow-y-auto pb-16 md:pb-0">
         <header className={`px-6 lg:px-8 py-5 border-b flex items-center justify-between backdrop-blur-md z-20 ${
           theme==='dark'?'border-slate-800 bg-slate-900/40':'border-slate-200 bg-white/80'
         }`}>
@@ -698,22 +730,44 @@ export default function BirthdayApp() {
                     </div>
                   </div>
                   <div className="xl:col-span-4 space-y-6">
-                    <div className="p-5 rounded-3xl border bg-slate-900 border-slate-800">
-                      <h4 className="text-xs font-black uppercase text-slate-400 mb-4">Métricas Globales 📈</h4>
-                      <div className="grid grid-cols-2 gap-4 mb-4">
-                        <div className="p-3 rounded-2xl bg-slate-950/60">
-                          <span className="text-[10px] text-slate-400 font-bold block">COMPRADOS</span>
-                          <span className="text-xl font-black text-emerald-500">{globalStats.completados}</span>
-                        </div>
-                        <div className="p-3 rounded-2xl bg-slate-950/60">
-                          <span className="text-[10px] text-slate-400 font-bold block">PENDIENTES</span>
-                          <span className="text-xl font-black text-rose-500">{globalStats.pendientes}</span>
+                    <div className="p-5 rounded-3xl border bg-slate-900 border-slate-800 space-y-3">
+                      <h4 className="text-xs font-black uppercase text-slate-400">Resumen del Año 📊</h4>
+
+                      {/* Cumpleaños ya pasados */}
+                      <div className="p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center gap-3">
+                        <span className="text-2xl">✅</span>
+                        <div>
+                          <span className="text-[10px] font-black uppercase text-emerald-400 block">Ya celebrados</span>
+                          <span className="text-xl font-black text-emerald-400">{globalStats.cumplesPasados} cumpleaños</span>
                         </div>
                       </div>
-                      <div className="space-y-2">
-                        <div className="flex justify-between text-xs font-bold"><span className="text-slate-400">Eficiencia:</span><span className="text-rose-500">{globalStats.porcentaje}%</span></div>
-                        <div className="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
-                          <div className="h-full bg-gradient-to-r from-rose-500 to-indigo-500" style={{ width:`${globalStats.porcentaje}%` }}/>
+
+                      {/* Cumpleaños por venir */}
+                      <div className="p-3.5 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center gap-3">
+                        <span className="text-2xl">🎂</span>
+                        <div>
+                          <span className="text-[10px] font-black uppercase text-indigo-400 block">Por celebrar</span>
+                          <span className="text-xl font-black text-indigo-400">{globalStats.cumplesPorVenir} cumpleaños</span>
+                        </div>
+                      </div>
+
+                      {/* Pagos pendientes de pasados */}
+                      <div className={`p-3.5 rounded-2xl border flex items-center gap-3 ${
+                        globalStats.pagosPendientesEnPasados === 0
+                          ? 'bg-slate-800/40 border-slate-700'
+                          : 'bg-rose-500/10 border-rose-500/20'
+                      }`}>
+                        <span className="text-2xl">{globalStats.pagosPendientesEnPasados === 0 ? '💸' : '⏳'}</span>
+                        <div>
+                          <span className={`text-[10px] font-black uppercase block ${globalStats.pagosPendientesEnPasados===0?'text-slate-400':'text-rose-400'}`}>
+                            Aportes por cobrar
+                          </span>
+                          <span className={`text-xl font-black ${globalStats.pagosPendientesEnPasados===0?'text-slate-300':'text-rose-400'}`}>
+                            {globalStats.pagosPendientesEnPasados === 0 ? '¡Todo al día!' : `${globalStats.pagosPendientesEnPasados} pagos`}
+                          </span>
+                          {globalStats.pagosPendientesEnPasados > 0 && (
+                            <span className="text-[10px] text-rose-400/70 block">de cumpleaños ya pasados</span>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -744,7 +798,7 @@ export default function BirthdayApp() {
                       <IconSearch className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 pointer-events-none"/>
                       <input type="text" placeholder="Buscar integrante..." value={searchQuery}
                         onChange={e => setSearchQuery(e.target.value)}
-                        className="w-full pl-12 pr-4 py-2.5 rounded-2xl text-sm font-semibold outline-none border bg-slate-950 border-slate-800 text-white focus:border-rose-500"/>
+                        className="w-full pl-12 pr-4 py-[11px] rounded-2xl text-sm font-semibold outline-none border bg-slate-950 border-slate-800 text-white focus:border-rose-500"/>
                     </div>
                     <div className="flex items-center gap-2">
                       {(['todos','pendientes','completados'] as const).map(f => (
@@ -805,11 +859,23 @@ export default function BirthdayApp() {
 
                     {/* Formulario */}
                     <form onSubmit={handleSavePerson} className="lg:col-span-5 space-y-4">
-                      <div className={`p-6 rounded-3xl border ${theme==='dark'?'bg-slate-900/60 border-slate-800':'bg-white border-slate-200 shadow-xl'}`}>
-                        <div className="flex items-center gap-3 mb-5 pb-3 border-b border-slate-800/30">
-                          {isEditing ? <IconEdit className="text-rose-500 w-5 h-5"/> : <IconUserAdd className="text-rose-500 w-5 h-5"/>}
-                          <h4 className="font-black text-base">{isEditing?'Editar Integrante':'Agregar Integrante'}</h4>
-                        </div>
+                      <div className={`rounded-3xl border ${theme==='dark'?'bg-slate-900/60 border-slate-800':'bg-white border-slate-200 shadow-xl'}`}>
+                        {/* Header — siempre visible, en mobile es clickeable para plegar/desplegar */}
+                        <button
+                          type="button"
+                          onClick={() => setFormExpanded(v => !v)}
+                          className="lg:pointer-events-none w-full flex items-center justify-between gap-3 p-6 pb-3"
+                        >
+                          <div className="flex items-center gap-3">
+                            {isEditing ? <IconEdit className="text-rose-500 w-5 h-5"/> : <IconUserAdd className="text-rose-500 w-5 h-5"/>}
+                            <h4 className="font-black text-base">{isEditing?'Editar Integrante':'Agregar Integrante'}</h4>
+                          </div>
+                          <IconChevronRight className={`lg:hidden w-5 h-5 text-slate-400 transition-transform duration-200 ${formExpanded || isEditing ? 'rotate-90' : ''}`}/>
+                        </button>
+
+                        {/* Contenido: siempre visible en desktop, plegable en mobile */}
+                        <div className={`${(formExpanded || isEditing) ? 'block' : 'hidden'} lg:block px-6 pb-6`}>
+                        <div className="pt-3 border-t border-slate-800/30 mb-5"/>
 
                         <div className="space-y-4">
                           {/* Nombre */}
@@ -817,7 +883,7 @@ export default function BirthdayApp() {
                             <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">Nombre</label>
                             <input type="text" required placeholder="Ej. Francisca" value={formName}
                               onChange={e => setFormName(e.target.value)}
-                              className="w-full px-4 py-2.5 rounded-xl text-sm font-semibold outline-none border bg-slate-950 border-slate-800 text-white focus:border-rose-500"/>
+                              className="w-full px-4 py-[11px] rounded-xl text-sm font-semibold outline-none border bg-slate-950 border-slate-800 text-white focus:border-rose-500"/>
                           </div>
 
                           {/* Fecha */}
@@ -826,12 +892,12 @@ export default function BirthdayApp() {
                               <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">Día</label>
                               <input type="number" required min={1} max={31} value={formDay}
                                 onChange={e => setFormDay(Math.max(1, Math.min(31, parseInt(e.target.value)||1)))}
-                                className="w-full px-4 py-2.5 rounded-xl text-sm font-semibold outline-none border bg-slate-950 border-slate-800 text-white focus:border-rose-500"/>
+                                className="w-full px-4 py-[11px] rounded-xl text-sm font-semibold outline-none border bg-slate-950 border-slate-800 text-white focus:border-rose-500"/>
                             </div>
                             <div>
                               <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">Mes</label>
                               <select value={formMonth} onChange={e => setFormMonth(parseInt(e.target.value))}
-                                className="w-full px-4 py-2.5 rounded-xl text-sm font-semibold outline-none border bg-slate-950 border-slate-800 text-white focus:border-rose-500">
+                                className="w-full px-4 py-[11px] rounded-xl text-sm font-semibold outline-none border bg-slate-950 border-slate-800 text-white focus:border-rose-500">
                                 {MONTH_NAMES.map((n,i) => <option key={i+1} value={i+1}>{n}</option>)}
                               </select>
                             </div>
@@ -856,7 +922,7 @@ export default function BirthdayApp() {
                             <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">Teléfono (opcional)</label>
                             <input type="tel" placeholder="+56 9 1234 5678" value={formPhone}
                               onChange={e => setFormPhone(e.target.value)}
-                              className="w-full px-4 py-2.5 rounded-xl text-sm font-semibold outline-none border bg-slate-950 border-slate-800 text-white focus:border-rose-500"/>
+                              className="w-full px-4 py-[11px] rounded-xl text-sm font-semibold outline-none border bg-slate-950 border-slate-800 text-white focus:border-rose-500"/>
                           </div>
 
                           {/* Foto */}
@@ -891,7 +957,7 @@ export default function BirthdayApp() {
                           <div>
                             <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">Color de Avatar</label>
                             <select value={formColor} onChange={e => setFormColor(e.target.value)}
-                              className="w-full px-4 py-2.5 rounded-xl text-xs font-semibold outline-none border bg-slate-950 border-slate-800 text-white focus:border-rose-500">
+                              className="w-full px-4 py-[11px] rounded-xl text-xs font-semibold outline-none border bg-slate-950 border-slate-800 text-white focus:border-rose-500">
                               {PRESET_COLORS.map((c,i) => <option key={i} value={c.value}>{c.name}</option>)}
                             </select>
                             <div className="flex items-center gap-2 mt-2 pl-1">
@@ -935,6 +1001,7 @@ export default function BirthdayApp() {
                             </button>
                           )}
                         </div>
+                        </div>{/* fin div plegable */}
                       </div>
                     </form>
 
