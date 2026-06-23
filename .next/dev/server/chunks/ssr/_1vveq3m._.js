@@ -740,10 +740,7 @@ function BirthdayApp() {
             try {
                 const foto_url = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$db$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["uploadFoto"](editingPersonId, file);
                 await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$db$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["updateFotoUrl"](editingPersonId, foto_url);
-                setTeam((prev)=>prev.map((p)=>p.id === editingPersonId ? {
-                            ...p,
-                            foto_url
-                        } : p));
+                await loadData();
                 showNotification('¡Foto guardada!', 'success');
             } catch  {
                 showNotification('Error al guardar foto', 'error');
@@ -1026,7 +1023,7 @@ function BirthdayApp() {
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                 className: "block text-[10px] text-slate-400 font-bold uppercase tracking-wider",
-                                                children: "del Mejor HUB!"
+                                                children: "el mejor HUB!"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/BirthdayApp.tsx",
                                                 lineNumber: 514,
@@ -1252,68 +1249,134 @@ function BirthdayApp() {
                 className: "flex-1 flex flex-col min-h-screen overflow-y-auto pb-16 md:pb-0",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("header", {
-                        className: `px-6 lg:px-8 py-5 border-b flex items-center justify-between backdrop-blur-md z-20 ${theme === 'dark' ? 'border-slate-800 bg-slate-900/40' : 'border-slate-200 bg-white/80'}`,
+                        className: `px-6 lg:px-8 py-4 border-b flex items-center justify-between backdrop-blur-md z-20 ${theme === 'dark' ? 'border-slate-800 bg-slate-900/40' : 'border-slate-200 bg-white/80'}`,
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                children: selectedPersonId !== null ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                    onClick: ()=>{
-                                        playSoundEffect('tap');
-                                        setSelectedPersonId(null);
-                                    },
-                                    className: "flex items-center gap-2 text-sm font-bold text-rose-500 bg-rose-500/10 px-4 py-2 rounded-xl",
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(IconChevronLeft, {
-                                            className: "w-4 h-4"
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/BirthdayApp.tsx",
-                                            lineNumber: 565,
-                                            columnNumber: 17
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                            children: "Volver a la Lista"
-                                        }, void 0, false, {
-                                            fileName: "[project]/components/BirthdayApp.tsx",
-                                            lineNumber: 565,
-                                            columnNumber: 56
-                                        }, this)
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/components/BirthdayApp.tsx",
-                                    lineNumber: 563,
-                                    columnNumber: 15
-                                }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                    className: "text-xl font-black",
-                                    children: [
-                                        activeTab === 'home' && 'Cumpleaños HUB',
-                                        activeTab === 'regalos' && 'Centro de Regalos Colectivos',
-                                        activeTab === 'planilla' && 'Base de Datos del Equipo'
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/components/BirthdayApp.tsx",
-                                    lineNumber: 568,
-                                    columnNumber: 15
-                                }, this)
-                            }, void 0, false, {
-                                fileName: "[project]/components/BirthdayApp.tsx",
-                                lineNumber: 561,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-400",
+                                className: "flex items-center gap-3",
                                 children: [
-                                    "Mes actual: ",
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                        className: "text-rose-500 font-extrabold",
-                                        children: MONTH_NAMES[CURRENT_MONTH - 1]
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "md:hidden p-2 rounded-2xl bg-rose-500/10 text-rose-500 shrink-0",
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(IconCake, {
+                                            className: "w-5 h-5 animate-bounce"
+                                        }, void 0, false, {
+                                            fileName: "[project]/components/BirthdayApp.tsx",
+                                            lineNumber: 565,
+                                            columnNumber: 15
+                                        }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                        lineNumber: 576,
-                                        columnNumber: 25
+                                        lineNumber: 564,
+                                        columnNumber: 13
+                                    }, this),
+                                    selectedPersonId !== null ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                        onClick: ()=>{
+                                            playSoundEffect('tap');
+                                            setSelectedPersonId(null);
+                                        },
+                                        className: "flex items-center gap-2 text-sm font-bold text-rose-500 bg-rose-500/10 px-4 py-2 rounded-xl",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(IconChevronLeft, {
+                                                className: "w-4 h-4"
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/BirthdayApp.tsx",
+                                                lineNumber: 570,
+                                                columnNumber: 17
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                children: "Volver"
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/BirthdayApp.tsx",
+                                                lineNumber: 570,
+                                                columnNumber: 56
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/components/BirthdayApp.tsx",
+                                        lineNumber: 568,
+                                        columnNumber: 15
+                                    }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                                className: "text-xl font-black leading-tight",
+                                                children: [
+                                                    activeTab === 'home' && 'Cumples mejor HUB',
+                                                    activeTab === 'regalos' && 'Centro de Regalos',
+                                                    activeTab === 'planilla' && 'Planilla del Equipo'
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/components/BirthdayApp.tsx",
+                                                lineNumber: 574,
+                                                columnNumber: 17
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                className: "md:hidden text-[11px] text-slate-400 font-semibold mt-0.5",
+                                                children: [
+                                                    new Date().getDate(),
+                                                    " de ",
+                                                    MONTH_NAMES[new Date().getMonth()]
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/components/BirthdayApp.tsx",
+                                                lineNumber: 580,
+                                                columnNumber: 17
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/components/BirthdayApp.tsx",
+                                        lineNumber: 573,
+                                        columnNumber: 15
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                lineNumber: 575,
+                                lineNumber: 562,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "flex items-center gap-3",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "hidden md:block px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-400",
+                                        children: [
+                                            "Mes: ",
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-rose-500 font-extrabold",
+                                                children: MONTH_NAMES[CURRENT_MONTH - 1]
+                                            }, void 0, false, {
+                                                fileName: "[project]/components/BirthdayApp.tsx",
+                                                lineNumber: 591,
+                                                columnNumber: 20
+                                            }, this)
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/components/BirthdayApp.tsx",
+                                        lineNumber: 590,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                        onClick: ()=>{
+                                            playSoundEffect('tap');
+                                            setTheme((t)=>t === 'dark' ? 'light' : 'dark');
+                                        },
+                                        className: `md:hidden relative flex items-center w-14 h-7 rounded-full transition-colors duration-300 ${theme === 'dark' ? 'bg-slate-700' : 'bg-slate-200'}`,
+                                        "aria-label": "Cambiar tema",
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: `absolute top-0.5 left-0.5 w-6 h-6 rounded-full flex items-center justify-center text-sm transition-transform duration-300 shadow ${theme === 'dark' ? 'translate-x-0 bg-slate-900' : 'translate-x-7 bg-white'}`,
+                                            children: theme === 'dark' ? '🌙' : '☀️'
+                                        }, void 0, false, {
+                                            fileName: "[project]/components/BirthdayApp.tsx",
+                                            lineNumber: 599,
+                                            columnNumber: 15
+                                        }, this)
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/BirthdayApp.tsx",
+                                        lineNumber: 594,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/components/BirthdayApp.tsx",
+                                lineNumber: 588,
                                 columnNumber: 11
                             }, this)
                         ]
@@ -1350,12 +1413,12 @@ function BirthdayApp() {
                                                                     alt: person.nombre
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                    lineNumber: 597,
+                                                                    lineNumber: 625,
                                                                     columnNumber: 29
                                                                 }, this) : person.nombre.charAt(0)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                lineNumber: 595,
+                                                                lineNumber: 623,
                                                                 columnNumber: 23
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1366,7 +1429,7 @@ function BirthdayApp() {
                                                                         children: "Fondo Colectivo"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                                                        lineNumber: 601,
+                                                                        lineNumber: 629,
                                                                         columnNumber: 25
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
@@ -1374,7 +1437,7 @@ function BirthdayApp() {
                                                                         children: person.nombre
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                                                        lineNumber: 602,
+                                                                        lineNumber: 630,
                                                                         columnNumber: 25
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1396,25 +1459,25 @@ function BirthdayApp() {
                                                                                 ]
                                                                             }, void 0, true, {
                                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                lineNumber: 605,
+                                                                                lineNumber: 633,
                                                                                 columnNumber: 47
                                                                             }, this)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                                                        lineNumber: 603,
+                                                                        lineNumber: 631,
                                                                         columnNumber: 25
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                lineNumber: 600,
+                                                                lineNumber: 628,
                                                                 columnNumber: 23
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                                        lineNumber: 594,
+                                                        lineNumber: 622,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1428,7 +1491,7 @@ function BirthdayApp() {
                                                                         children: "Recaudación:"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                                                        lineNumber: 611,
+                                                                        lineNumber: 639,
                                                                         columnNumber: 25
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1443,13 +1506,13 @@ function BirthdayApp() {
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                                                        lineNumber: 612,
+                                                                        lineNumber: 640,
                                                                         columnNumber: 25
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                lineNumber: 610,
+                                                                lineNumber: 638,
                                                                 columnNumber: 23
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1461,24 +1524,24 @@ function BirthdayApp() {
                                                                     }
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                    lineNumber: 617,
+                                                                    lineNumber: 645,
                                                                     columnNumber: 25
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                lineNumber: 616,
+                                                                lineNumber: 644,
                                                                 columnNumber: 23
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                                        lineNumber: 609,
+                                                        lineNumber: 637,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                lineNumber: 593,
+                                                lineNumber: 621,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1489,7 +1552,7 @@ function BirthdayApp() {
                                                         children: "Regalos Registrados 🎁"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                                        lineNumber: 624,
+                                                        lineNumber: 652,
                                                         columnNumber: 21
                                                     }, this),
                                                     validGifts.length > 0 ? validGifts.map((g, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1502,7 +1565,7 @@ function BirthdayApp() {
                                                                         children: i + 1
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                                                        lineNumber: 628,
+                                                                        lineNumber: 656,
                                                                         columnNumber: 27
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1513,7 +1576,7 @@ function BirthdayApp() {
                                                                                 children: g.descripcion
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                lineNumber: 630,
+                                                                                lineNumber: 658,
                                                                                 columnNumber: 47
                                                                             }, this),
                                                                             g.enlace && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1526,14 +1589,14 @@ function BirthdayApp() {
                                                                                                 className: "w-3.5 h-3.5"
                                                                                             }, void 0, false, {
                                                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                                lineNumber: 633,
+                                                                                                lineNumber: 661,
                                                                                                 columnNumber: 121
                                                                                             }, this),
                                                                                             "Enlace:"
                                                                                         ]
                                                                                     }, void 0, true, {
                                                                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                        lineNumber: 633,
+                                                                                        lineNumber: 661,
                                                                                         columnNumber: 33
                                                                                     }, this),
                                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1547,7 +1610,7 @@ function BirthdayApp() {
                                                                                                 children: g.enlace
                                                                                             }, void 0, false, {
                                                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                                lineNumber: 635,
+                                                                                                lineNumber: 663,
                                                                                                 columnNumber: 35
                                                                                             }, this),
                                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1556,36 +1619,36 @@ function BirthdayApp() {
                                                                                                 children: "Copiar"
                                                                                             }, void 0, false, {
                                                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                                lineNumber: 639,
+                                                                                                lineNumber: 667,
                                                                                                 columnNumber: 35
                                                                                             }, this)
                                                                                         ]
                                                                                     }, void 0, true, {
                                                                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                        lineNumber: 634,
+                                                                                        lineNumber: 662,
                                                                                         columnNumber: 33
                                                                                     }, this)
                                                                                 ]
                                                                             }, void 0, true, {
                                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                lineNumber: 632,
+                                                                                lineNumber: 660,
                                                                                 columnNumber: 31
                                                                             }, this)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                                                        lineNumber: 629,
+                                                                        lineNumber: 657,
                                                                         columnNumber: 27
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                lineNumber: 627,
+                                                                lineNumber: 655,
                                                                 columnNumber: 25
                                                             }, this)
                                                         }, i, false, {
                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                            lineNumber: 626,
+                                                            lineNumber: 654,
                                                             columnNumber: 23
                                                         }, this)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                         className: "p-6 text-center rounded-2xl border border-dashed border-slate-800",
@@ -1594,24 +1657,24 @@ function BirthdayApp() {
                                                             children: "Sin ideas de regalo cargadas."
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                            lineNumber: 651,
+                                                            lineNumber: 679,
                                                             columnNumber: 25
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                                        lineNumber: 650,
+                                                        lineNumber: 678,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                lineNumber: 623,
+                                                lineNumber: 651,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                        lineNumber: 592,
+                                        lineNumber: 620,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1627,27 +1690,27 @@ function BirthdayApp() {
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                                                     className: "text-base font-black",
                                                                     children: [
-                                                                        "Aportantes (",
+                                                                        "Aportes (",
                                                                         team.length - 1 - paidCount,
                                                                         " pendientes)"
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                    lineNumber: 661,
+                                                                    lineNumber: 689,
                                                                     columnNumber: 25
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                                     className: "text-xs text-slate-400 mt-1",
-                                                                    children: "Haz clic para marcar/desmarcar."
+                                                                    children: "Toca para marcar/desmarcar."
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                    lineNumber: 662,
+                                                                    lineNumber: 690,
                                                                     columnNumber: 25
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                            lineNumber: 660,
+                                                            lineNumber: 688,
                                                             columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1658,26 +1721,26 @@ function BirthdayApp() {
                                                                     className: "w-4 h-4"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                    lineNumber: 666,
+                                                                    lineNumber: 694,
                                                                     columnNumber: 25
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                                     children: "Completar Vaca"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                    lineNumber: 666,
+                                                                    lineNumber: 694,
                                                                     columnNumber: 60
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                            lineNumber: 664,
+                                                            lineNumber: 692,
                                                             columnNumber: 23
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                    lineNumber: 659,
+                                                    lineNumber: 687,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1699,12 +1762,12 @@ function BirthdayApp() {
                                                                                 alt: ""
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                lineNumber: 680,
+                                                                                lineNumber: 708,
                                                                                 columnNumber: 37
                                                                             }, this) : contributor.nombre.charAt(0)
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                            lineNumber: 678,
+                                                                            lineNumber: 706,
                                                                             columnNumber: 31
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1712,13 +1775,13 @@ function BirthdayApp() {
                                                                             children: contributor.nombre
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                            lineNumber: 683,
+                                                                            lineNumber: 711,
                                                                             columnNumber: 31
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                    lineNumber: 677,
+                                                                    lineNumber: 705,
                                                                     columnNumber: 29
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1726,36 +1789,36 @@ function BirthdayApp() {
                                                                     children: hasPaid ? 'PAGÓ' : 'FALTA'
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                    lineNumber: 685,
+                                                                    lineNumber: 713,
                                                                     columnNumber: 29
                                                                 }, this)
                                                             ]
                                                         }, contributor.id, true, {
                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                            lineNumber: 673,
+                                                            lineNumber: 701,
                                                             columnNumber: 27
                                                         }, this);
                                                     })
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                    lineNumber: 669,
+                                                    lineNumber: 697,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                            lineNumber: 658,
+                                            lineNumber: 686,
                                             columnNumber: 19
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                        lineNumber: 657,
+                                        lineNumber: 685,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                lineNumber: 591,
+                                lineNumber: 619,
                                 columnNumber: 15
                             }, this);
                         })() : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -1778,7 +1841,7 @@ function BirthdayApp() {
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                            lineNumber: 703,
+                                                            lineNumber: 731,
                                                             columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1786,13 +1849,13 @@ function BirthdayApp() {
                                                             children: "Gestiona el fondo colectivo y descubre los regalos del equipo."
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                            lineNumber: 704,
+                                                            lineNumber: 732,
                                                             columnNumber: 23
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                    lineNumber: 702,
+                                                    lineNumber: 730,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1801,13 +1864,13 @@ function BirthdayApp() {
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                                                             className: "text-xs font-black uppercase text-slate-400 tracking-widest",
                                                             children: [
-                                                                "Cumpleañeros de ",
+                                                                "Cumples de ",
                                                                 MONTH_NAMES[CURRENT_MONTH - 1],
                                                                 " 🎉"
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                            lineNumber: 707,
+                                                            lineNumber: 735,
                                                             columnNumber: 23
                                                         }, this),
                                                         currentMonthBirthdays.length === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1815,7 +1878,7 @@ function BirthdayApp() {
                                                             children: "Sin cumpleaños este mes."
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                            lineNumber: 709,
+                                                            lineNumber: 737,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1832,7 +1895,7 @@ function BirthdayApp() {
                                                                             children: "COMPRADO ✅"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                            lineNumber: 718,
+                                                                            lineNumber: 746,
                                                                             columnNumber: 45
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1846,12 +1909,12 @@ function BirthdayApp() {
                                                                                         alt: ""
                                                                                     }, void 0, false, {
                                                                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                        lineNumber: 721,
+                                                                                        lineNumber: 749,
                                                                                         columnNumber: 54
                                                                                     }, this) : person.nombre.charAt(0)
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                    lineNumber: 720,
+                                                                                    lineNumber: 748,
                                                                                     columnNumber: 33
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1866,13 +1929,13 @@ function BirthdayApp() {
                                                                                                     children: person.emoji_signo
                                                                                                 }, void 0, false, {
                                                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                                    lineNumber: 724,
+                                                                                                    lineNumber: 752,
                                                                                                     columnNumber: 95
                                                                                                 }, this)
                                                                                             ]
                                                                                         }, void 0, true, {
                                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                            lineNumber: 724,
+                                                                                            lineNumber: 752,
                                                                                             columnNumber: 35
                                                                                         }, this),
                                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1887,7 +1950,7 @@ function BirthdayApp() {
                                                                                             ]
                                                                                         }, void 0, true, {
                                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                            lineNumber: 725,
+                                                                                            lineNumber: 753,
                                                                                             columnNumber: 35
                                                                                         }, this),
                                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1898,7 +1961,7 @@ function BirthdayApp() {
                                                                                                     children: "Regalo Principal:"
                                                                                                 }, void 0, false, {
                                                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                                    lineNumber: 727,
+                                                                                                    lineNumber: 755,
                                                                                                     columnNumber: 37
                                                                                                 }, this),
                                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1909,91 +1972,126 @@ function BirthdayApp() {
                                                                                                     ]
                                                                                                 }, void 0, true, {
                                                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                                    lineNumber: 728,
+                                                                                                    lineNumber: 756,
                                                                                                     columnNumber: 37
                                                                                                 }, this)
                                                                                             ]
                                                                                         }, void 0, true, {
                                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                            lineNumber: 726,
+                                                                                            lineNumber: 754,
                                                                                             columnNumber: 35
                                                                                         }, this)
                                                                                     ]
                                                                                 }, void 0, true, {
                                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                    lineNumber: 723,
+                                                                                    lineNumber: 751,
                                                                                     columnNumber: 33
                                                                                 }, this)
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                            lineNumber: 719,
+                                                                            lineNumber: 747,
                                                                             columnNumber: 31
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                            className: "mt-4 pt-4 border-t border-slate-800/40 flex items-center justify-between gap-4",
+                                                                            className: "mt-4 pt-4 border-t border-slate-800/40 space-y-2",
                                                                             children: [
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                                    className: "flex-1 h-1.5 bg-slate-800 rounded-full overflow-hidden",
-                                                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                                        className: "h-full bg-rose-500",
-                                                                                        style: {
-                                                                                            width: `${paidCount / Math.max(team.length - 1, 1) * 100}%`
-                                                                                        }
-                                                                                    }, void 0, false, {
-                                                                                        fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                        lineNumber: 734,
-                                                                                        columnNumber: 35
-                                                                                    }, this)
-                                                                                }, void 0, false, {
+                                                                                    className: "flex items-center justify-between text-[10px] font-bold",
+                                                                                    children: [
+                                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                                            className: paidCount === team.length - 1 ? 'text-emerald-400' : 'text-slate-400',
+                                                                                            children: [
+                                                                                                paidCount,
+                                                                                                "/",
+                                                                                                team.length - 1,
+                                                                                                " pagaron"
+                                                                                            ]
+                                                                                        }, void 0, true, {
+                                                                                            fileName: "[project]/components/BirthdayApp.tsx",
+                                                                                            lineNumber: 762,
+                                                                                            columnNumber: 35
+                                                                                        }, this),
+                                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                                            className: "text-slate-500",
+                                                                                            children: [
+                                                                                                team.length - 1 - paidCount,
+                                                                                                " pendientes"
+                                                                                            ]
+                                                                                        }, void 0, true, {
+                                                                                            fileName: "[project]/components/BirthdayApp.tsx",
+                                                                                            lineNumber: 765,
+                                                                                            columnNumber: 35
+                                                                                        }, this)
+                                                                                    ]
+                                                                                }, void 0, true, {
                                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                    lineNumber: 733,
+                                                                                    lineNumber: 761,
                                                                                     columnNumber: 33
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                                    className: "flex gap-2",
-                                                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                                                        onClick: ()=>setSelectedPersonId(person.id),
-                                                                                        className: "px-3 py-2 rounded-xl bg-slate-800 text-slate-200 font-bold text-[11px]",
-                                                                                        children: "Ver persona"
-                                                                                    }, void 0, false, {
-                                                                                        fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                        lineNumber: 737,
-                                                                                        columnNumber: 35
-                                                                                    }, this)
-                                                                                }, void 0, false, {
+                                                                                    className: "flex items-center gap-3",
+                                                                                    children: [
+                                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                                            className: "flex-1 h-1.5 bg-slate-800 rounded-full overflow-hidden",
+                                                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                                                className: `h-full transition-all duration-500 ${totalPaid ? 'bg-emerald-500' : 'bg-rose-500'}`,
+                                                                                                style: {
+                                                                                                    width: `${paidCount / Math.max(team.length - 1, 1) * 100}%`
+                                                                                                }
+                                                                                            }, void 0, false, {
+                                                                                                fileName: "[project]/components/BirthdayApp.tsx",
+                                                                                                lineNumber: 769,
+                                                                                                columnNumber: 37
+                                                                                            }, this)
+                                                                                        }, void 0, false, {
+                                                                                            fileName: "[project]/components/BirthdayApp.tsx",
+                                                                                            lineNumber: 768,
+                                                                                            columnNumber: 35
+                                                                                        }, this),
+                                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                                                            onClick: ()=>setSelectedPersonId(person.id),
+                                                                                            className: "px-3 py-2 rounded-xl bg-slate-800 text-slate-200 font-bold text-[11px] shrink-0",
+                                                                                            children: "Ver →"
+                                                                                        }, void 0, false, {
+                                                                                            fileName: "[project]/components/BirthdayApp.tsx",
+                                                                                            lineNumber: 771,
+                                                                                            columnNumber: 35
+                                                                                        }, this)
+                                                                                    ]
+                                                                                }, void 0, true, {
                                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                    lineNumber: 736,
+                                                                                    lineNumber: 767,
                                                                                     columnNumber: 33
                                                                                 }, this)
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                            lineNumber: 732,
+                                                                            lineNumber: 760,
                                                                             columnNumber: 31
                                                                         }, this)
                                                                     ]
                                                                 }, person.id, true, {
                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                    lineNumber: 717,
+                                                                    lineNumber: 745,
                                                                     columnNumber: 29
                                                                 }, this);
                                                             })
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                            lineNumber: 711,
+                                                            lineNumber: 739,
                                                             columnNumber: 23
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                    lineNumber: 706,
+                                                    lineNumber: 734,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                            lineNumber: 701,
+                                            lineNumber: 729,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2007,7 +2105,7 @@ function BirthdayApp() {
                                                             children: "Resumen del Año 📊"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                            lineNumber: 748,
+                                                            lineNumber: 782,
                                                             columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2018,7 +2116,7 @@ function BirthdayApp() {
                                                                     children: "✅"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                    lineNumber: 752,
+                                                                    lineNumber: 786,
                                                                     columnNumber: 25
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2028,7 +2126,7 @@ function BirthdayApp() {
                                                                             children: "Ya celebrados"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                            lineNumber: 754,
+                                                                            lineNumber: 788,
                                                                             columnNumber: 27
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2039,19 +2137,19 @@ function BirthdayApp() {
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                            lineNumber: 755,
+                                                                            lineNumber: 789,
                                                                             columnNumber: 27
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                    lineNumber: 753,
+                                                                    lineNumber: 787,
                                                                     columnNumber: 25
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                            lineNumber: 751,
+                                                            lineNumber: 785,
                                                             columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2062,7 +2160,7 @@ function BirthdayApp() {
                                                                     children: "🎂"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                    lineNumber: 761,
+                                                                    lineNumber: 795,
                                                                     columnNumber: 25
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2072,7 +2170,7 @@ function BirthdayApp() {
                                                                             children: "Por celebrar"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                            lineNumber: 763,
+                                                                            lineNumber: 797,
                                                                             columnNumber: 27
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2083,19 +2181,19 @@ function BirthdayApp() {
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                            lineNumber: 764,
+                                                                            lineNumber: 798,
                                                                             columnNumber: 27
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                    lineNumber: 762,
+                                                                    lineNumber: 796,
                                                                     columnNumber: 25
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                            lineNumber: 760,
+                                                            lineNumber: 794,
                                                             columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2106,7 +2204,7 @@ function BirthdayApp() {
                                                                     children: globalStats.pagosPendientesEnPasados === 0 ? '💸' : '⏳'
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                    lineNumber: 774,
+                                                                    lineNumber: 808,
                                                                     columnNumber: 25
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2116,7 +2214,7 @@ function BirthdayApp() {
                                                                             children: "Aportes por cobrar"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                            lineNumber: 776,
+                                                                            lineNumber: 810,
                                                                             columnNumber: 27
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2124,7 +2222,7 @@ function BirthdayApp() {
                                                                             children: globalStats.pagosPendientesEnPasados === 0 ? '¡Todo al día!' : `${globalStats.pagosPendientesEnPasados} pagos`
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                            lineNumber: 779,
+                                                                            lineNumber: 813,
                                                                             columnNumber: 27
                                                                         }, this),
                                                                         globalStats.pagosPendientesEnPasados > 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2132,25 +2230,25 @@ function BirthdayApp() {
                                                                             children: "de cumpleaños ya pasados"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                            lineNumber: 783,
+                                                                            lineNumber: 817,
                                                                             columnNumber: 29
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                    lineNumber: 775,
+                                                                    lineNumber: 809,
                                                                     columnNumber: 25
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                            lineNumber: 769,
+                                                            lineNumber: 803,
                                                             columnNumber: 23
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                    lineNumber: 747,
+                                                    lineNumber: 781,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2161,7 +2259,7 @@ function BirthdayApp() {
                                                             children: "Próximos Cumpleaños ⏳"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                            lineNumber: 789,
+                                                            lineNumber: 823,
                                                             columnNumber: 23
                                                         }, this),
                                                         team.filter((p)=>p.mes !== CURRENT_MONTH).slice(0, 5).map((p)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2179,12 +2277,12 @@ function BirthdayApp() {
                                                                                     alt: ""
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                    lineNumber: 795,
+                                                                                    lineNumber: 829,
                                                                                     columnNumber: 45
                                                                                 }, this) : p.nombre.charAt(0)
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                lineNumber: 794,
+                                                                                lineNumber: 828,
                                                                                 columnNumber: 29
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2194,7 +2292,7 @@ function BirthdayApp() {
                                                                                         children: p.nombre
                                                                                     }, void 0, false, {
                                                                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                        lineNumber: 797,
+                                                                                        lineNumber: 831,
                                                                                         columnNumber: 34
                                                                                     }, this),
                                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2206,50 +2304,50 @@ function BirthdayApp() {
                                                                                         ]
                                                                                     }, void 0, true, {
                                                                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                        lineNumber: 797,
+                                                                                        lineNumber: 831,
                                                                                         columnNumber: 81
                                                                                     }, this)
                                                                                 ]
                                                                             }, void 0, true, {
                                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                lineNumber: 797,
+                                                                                lineNumber: 831,
                                                                                 columnNumber: 29
                                                                             }, this)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                                                        lineNumber: 793,
+                                                                        lineNumber: 827,
                                                                         columnNumber: 27
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(IconChevronRight, {
                                                                         className: "w-4 h-4 text-slate-500"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                                                        lineNumber: 799,
+                                                                        lineNumber: 833,
                                                                         columnNumber: 27
                                                                     }, this)
                                                                 ]
                                                             }, p.id, true, {
                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                lineNumber: 791,
+                                                                lineNumber: 825,
                                                                 columnNumber: 25
                                                             }, this))
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                    lineNumber: 788,
+                                                    lineNumber: 822,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                            lineNumber: 746,
+                                            lineNumber: 780,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                    lineNumber: 700,
+                                    lineNumber: 728,
                                     columnNumber: 17
                                 }, this),
                                 activeTab === 'regalos' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2265,7 +2363,7 @@ function BirthdayApp() {
                                                             className: "absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 pointer-events-none"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                            lineNumber: 812,
+                                                            lineNumber: 846,
                                                             columnNumber: 23
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2276,13 +2374,13 @@ function BirthdayApp() {
                                                             className: "w-full pl-12 pr-4 py-[11px] rounded-2xl text-sm font-semibold outline-none border bg-slate-950 border-slate-800 text-white focus:border-rose-500"
                                                         }, void 0, false, {
                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                            lineNumber: 813,
+                                                            lineNumber: 847,
                                                             columnNumber: 23
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                    lineNumber: 811,
+                                                    lineNumber: 845,
                                                     columnNumber: 21
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2297,18 +2395,18 @@ function BirthdayApp() {
                                                             children: f === 'todos' ? 'Todos' : f === 'pendientes' ? 'Pendientes ⏳' : 'Listos ✅'
                                                         }, f, false, {
                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                            lineNumber: 819,
+                                                            lineNumber: 853,
                                                             columnNumber: 25
                                                         }, this))
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                    lineNumber: 817,
+                                                    lineNumber: 851,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                            lineNumber: 810,
+                                            lineNumber: 844,
                                             columnNumber: 19
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2339,12 +2437,12 @@ function BirthdayApp() {
                                                                                 alt: ""
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                lineNumber: 838,
+                                                                                lineNumber: 872,
                                                                                 columnNumber: 52
                                                                             }, this) : person.nombre.charAt(0)
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                            lineNumber: 837,
+                                                                            lineNumber: 871,
                                                                             columnNumber: 31
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2358,13 +2456,13 @@ function BirthdayApp() {
                                                                                             children: person.emoji_signo
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                            lineNumber: 841,
+                                                                                            lineNumber: 875,
                                                                                             columnNumber: 88
                                                                                         }, this)
                                                                                     ]
                                                                                 }, void 0, true, {
                                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                    lineNumber: 841,
+                                                                                    lineNumber: 875,
                                                                                     columnNumber: 33
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2376,19 +2474,19 @@ function BirthdayApp() {
                                                                                     ]
                                                                                 }, void 0, true, {
                                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                    lineNumber: 842,
+                                                                                    lineNumber: 876,
                                                                                     columnNumber: 33
                                                                                 }, this)
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                            lineNumber: 840,
+                                                                            lineNumber: 874,
                                                                             columnNumber: 31
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                    lineNumber: 836,
+                                                                    lineNumber: 870,
                                                                     columnNumber: 29
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2399,7 +2497,7 @@ function BirthdayApp() {
                                                                             children: "Deseo Principal:"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                            lineNumber: 846,
+                                                                            lineNumber: 880,
                                                                             columnNumber: 31
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2410,19 +2508,19 @@ function BirthdayApp() {
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                            lineNumber: 847,
+                                                                            lineNumber: 881,
                                                                             columnNumber: 31
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                    lineNumber: 845,
+                                                                    lineNumber: 879,
                                                                     columnNumber: 29
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                            lineNumber: 835,
+                                                            lineNumber: 869,
                                                             columnNumber: 27
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2437,12 +2535,12 @@ function BirthdayApp() {
                                                                         }
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                                                        lineNumber: 852,
+                                                                        lineNumber: 886,
                                                                         columnNumber: 31
                                                                     }, this)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                    lineNumber: 851,
+                                                                    lineNumber: 885,
                                                                     columnNumber: 29
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2453,7 +2551,7 @@ function BirthdayApp() {
                                                                             children: totalPaid ? 'Listo' : 'En curso'
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                            lineNumber: 855,
+                                                                            lineNumber: 889,
                                                                             columnNumber: 31
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2461,37 +2559,37 @@ function BirthdayApp() {
                                                                             children: "Gestionar →"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                            lineNumber: 856,
+                                                                            lineNumber: 890,
                                                                             columnNumber: 31
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                    lineNumber: 854,
+                                                                    lineNumber: 888,
                                                                     columnNumber: 29
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                            lineNumber: 850,
+                                                            lineNumber: 884,
                                                             columnNumber: 27
                                                         }, this)
                                                     ]
                                                 }, person.id, true, {
                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                    lineNumber: 833,
+                                                    lineNumber: 867,
                                                     columnNumber: 25
                                                 }, this);
                                             })
                                         }, void 0, false, {
                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                            lineNumber: 826,
+                                            lineNumber: 860,
                                             columnNumber: 19
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                    lineNumber: 809,
+                                    lineNumber: 843,
                                     columnNumber: 17
                                 }, this),
                                 activeTab === 'planilla' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2517,13 +2615,13 @@ function BirthdayApp() {
                                                                             className: "text-rose-500 w-5 h-5"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                            lineNumber: 881,
+                                                                            lineNumber: 915,
                                                                             columnNumber: 42
                                                                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(IconUserAdd, {
                                                                             className: "text-rose-500 w-5 h-5"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                            lineNumber: 881,
+                                                                            lineNumber: 915,
                                                                             columnNumber: 90
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h4", {
@@ -2531,26 +2629,26 @@ function BirthdayApp() {
                                                                             children: isEditing ? 'Editar Integrante' : 'Agregar Integrante'
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                            lineNumber: 882,
+                                                                            lineNumber: 916,
                                                                             columnNumber: 29
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                    lineNumber: 880,
+                                                                    lineNumber: 914,
                                                                     columnNumber: 27
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(IconChevronRight, {
                                                                     className: `lg:hidden w-5 h-5 text-slate-400 transition-transform duration-200 ${formExpanded || isEditing ? 'rotate-90' : ''}`
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                    lineNumber: 884,
+                                                                    lineNumber: 918,
                                                                     columnNumber: 27
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                            lineNumber: 875,
+                                                            lineNumber: 909,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2560,7 +2658,7 @@ function BirthdayApp() {
                                                                     className: "pt-3 border-t border-slate-800/30 mb-5"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                    lineNumber: 889,
+                                                                    lineNumber: 923,
                                                                     columnNumber: 25
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2573,7 +2671,7 @@ function BirthdayApp() {
                                                                                     children: "Nombre"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                    lineNumber: 894,
+                                                                                    lineNumber: 928,
                                                                                     columnNumber: 29
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2585,13 +2683,13 @@ function BirthdayApp() {
                                                                                     className: "w-full px-4 py-[11px] rounded-xl text-sm font-semibold outline-none border bg-slate-950 border-slate-800 text-white focus:border-rose-500"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                    lineNumber: 895,
+                                                                                    lineNumber: 929,
                                                                                     columnNumber: 29
                                                                                 }, this)
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                            lineNumber: 893,
+                                                                            lineNumber: 927,
                                                                             columnNumber: 27
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2604,7 +2702,7 @@ function BirthdayApp() {
                                                                                             children: "Día"
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                            lineNumber: 903,
+                                                                                            lineNumber: 937,
                                                                                             columnNumber: 31
                                                                                         }, this),
                                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2617,13 +2715,13 @@ function BirthdayApp() {
                                                                                             className: "w-full px-4 py-[11px] rounded-xl text-sm font-semibold outline-none border bg-slate-950 border-slate-800 text-white focus:border-rose-500"
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                            lineNumber: 904,
+                                                                                            lineNumber: 938,
                                                                                             columnNumber: 31
                                                                                         }, this)
                                                                                     ]
                                                                                 }, void 0, true, {
                                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                    lineNumber: 902,
+                                                                                    lineNumber: 936,
                                                                                     columnNumber: 29
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2633,7 +2731,7 @@ function BirthdayApp() {
                                                                                             children: "Mes"
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                            lineNumber: 909,
+                                                                                            lineNumber: 943,
                                                                                             columnNumber: 31
                                                                                         }, this),
                                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -2645,24 +2743,24 @@ function BirthdayApp() {
                                                                                                     children: n
                                                                                                 }, i + 1, false, {
                                                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                                    lineNumber: 912,
+                                                                                                    lineNumber: 946,
                                                                                                     columnNumber: 59
                                                                                                 }, this))
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                            lineNumber: 910,
+                                                                                            lineNumber: 944,
                                                                                             columnNumber: 31
                                                                                         }, this)
                                                                                     ]
                                                                                 }, void 0, true, {
                                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                    lineNumber: 908,
+                                                                                    lineNumber: 942,
                                                                                     columnNumber: 29
                                                                                 }, this)
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                            lineNumber: 901,
+                                                                            lineNumber: 935,
                                                                             columnNumber: 27
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2675,7 +2773,7 @@ function BirthdayApp() {
                                                                                             children: "Signo (auto)"
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                            lineNumber: 920,
+                                                                                            lineNumber: 954,
                                                                                             columnNumber: 31
                                                                                         }, this),
                                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2685,13 +2783,13 @@ function BirthdayApp() {
                                                                                             className: "w-full px-4 py-2.5 rounded-xl text-xs font-semibold outline-none border bg-slate-950/40 border-slate-800 text-slate-300"
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                            lineNumber: 921,
+                                                                                            lineNumber: 955,
                                                                                             columnNumber: 31
                                                                                         }, this)
                                                                                     ]
                                                                                 }, void 0, true, {
                                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                    lineNumber: 919,
+                                                                                    lineNumber: 953,
                                                                                     columnNumber: 29
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2701,7 +2799,7 @@ function BirthdayApp() {
                                                                                             children: "Emoji"
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                            lineNumber: 925,
+                                                                                            lineNumber: 959,
                                                                                             columnNumber: 31
                                                                                         }, this),
                                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2711,19 +2809,19 @@ function BirthdayApp() {
                                                                                             className: "w-full px-4 py-2.5 rounded-xl text-center text-sm outline-none border bg-slate-950/40 border-slate-800 text-white"
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                            lineNumber: 926,
+                                                                                            lineNumber: 960,
                                                                                             columnNumber: 31
                                                                                         }, this)
                                                                                     ]
                                                                                 }, void 0, true, {
                                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                    lineNumber: 924,
+                                                                                    lineNumber: 958,
                                                                                     columnNumber: 29
                                                                                 }, this)
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                            lineNumber: 918,
+                                                                            lineNumber: 952,
                                                                             columnNumber: 27
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2733,7 +2831,7 @@ function BirthdayApp() {
                                                                                     children: "Teléfono (opcional)"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                    lineNumber: 933,
+                                                                                    lineNumber: 967,
                                                                                     columnNumber: 29
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2744,13 +2842,13 @@ function BirthdayApp() {
                                                                                     className: "w-full px-4 py-[11px] rounded-xl text-sm font-semibold outline-none border bg-slate-950 border-slate-800 text-white focus:border-rose-500"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                    lineNumber: 934,
+                                                                                    lineNumber: 968,
                                                                                     columnNumber: 29
                                                                                 }, this)
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                            lineNumber: 932,
+                                                                            lineNumber: 966,
                                                                             columnNumber: 27
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2760,7 +2858,7 @@ function BirthdayApp() {
                                                                                     children: "Foto de Perfil"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                    lineNumber: 941,
+                                                                                    lineNumber: 975,
                                                                                     columnNumber: 29
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2777,18 +2875,18 @@ function BirthdayApp() {
                                                                                                 alt: "preview"
                                                                                             }, void 0, false, {
                                                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                                lineNumber: 948,
+                                                                                                lineNumber: 982,
                                                                                                 columnNumber: 37
                                                                                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(IconCamera, {
                                                                                                 className: `w-6 h-6 ${isDragging ? 'text-rose-500 animate-bounce' : 'text-slate-600'}`
                                                                                             }, void 0, false, {
                                                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                                lineNumber: 949,
+                                                                                                lineNumber: 983,
                                                                                                 columnNumber: 37
                                                                                             }, this)
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                            lineNumber: 946,
+                                                                                            lineNumber: 980,
                                                                                             columnNumber: 31
                                                                                         }, this),
                                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2799,7 +2897,7 @@ function BirthdayApp() {
                                                                                                     children: isDragging ? '¡Suelta la foto aquí!' : 'Arrastra o selecciona una foto'
                                                                                                 }, void 0, false, {
                                                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                                    lineNumber: 952,
+                                                                                                    lineNumber: 986,
                                                                                                     columnNumber: 33
                                                                                                 }, this),
                                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2815,7 +2913,7 @@ function BirthdayApp() {
                                                                                                             className: "hidden"
                                                                                                         }, void 0, false, {
                                                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                                            lineNumber: 954,
+                                                                                                            lineNumber: 988,
                                                                                                             columnNumber: 35
                                                                                                         }, this),
                                                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -2824,7 +2922,7 @@ function BirthdayApp() {
                                                                                                             children: formPhotoPreview ? 'Cambiar' : 'Examinar'
                                                                                                         }, void 0, false, {
                                                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                                            lineNumber: 955,
+                                                                                                            lineNumber: 989,
                                                                                                             columnNumber: 35
                                                                                                         }, this),
                                                                                                         formPhotoPreview && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2837,10 +2935,7 @@ function BirthdayApp() {
                                                                                                                     try {
                                                                                                                         await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$db$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["deleteFoto"](editingPersonId);
                                                                                                                         await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$db$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["updateFotoUrl"](editingPersonId, null);
-                                                                                                                        setTeam((prev)=>prev.map((p)=>p.id === editingPersonId ? {
-                                                                                                                                    ...p,
-                                                                                                                                    foto_url: null
-                                                                                                                                } : p));
+                                                                                                                        await loadData();
                                                                                                                         showNotification('Foto eliminada', 'info');
                                                                                                                     } catch  {
                                                                                                                         showNotification('Error al eliminar foto', 'error');
@@ -2851,31 +2946,31 @@ function BirthdayApp() {
                                                                                                             children: "Eliminar foto"
                                                                                                         }, void 0, false, {
                                                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                                            lineNumber: 959,
+                                                                                                            lineNumber: 993,
                                                                                                             columnNumber: 37
                                                                                                         }, this)
                                                                                                     ]
                                                                                                 }, void 0, true, {
                                                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                                    lineNumber: 953,
+                                                                                                    lineNumber: 987,
                                                                                                     columnNumber: 33
                                                                                                 }, this)
                                                                                             ]
                                                                                         }, void 0, true, {
                                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                            lineNumber: 951,
+                                                                                            lineNumber: 985,
                                                                                             columnNumber: 31
                                                                                         }, this)
                                                                                     ]
                                                                                 }, void 0, true, {
                                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                    lineNumber: 942,
+                                                                                    lineNumber: 976,
                                                                                     columnNumber: 29
                                                                                 }, this)
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                            lineNumber: 940,
+                                                                            lineNumber: 974,
                                                                             columnNumber: 27
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2885,7 +2980,7 @@ function BirthdayApp() {
                                                                                     children: "Color de Avatar"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                    lineNumber: 982,
+                                                                                    lineNumber: 1016,
                                                                                     columnNumber: 29
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -2897,12 +2992,12 @@ function BirthdayApp() {
                                                                                             children: c.name
                                                                                         }, i, false, {
                                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                            lineNumber: 985,
+                                                                                            lineNumber: 1019,
                                                                                             columnNumber: 59
                                                                                         }, this))
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                    lineNumber: 983,
+                                                                                    lineNumber: 1017,
                                                                                     columnNumber: 29
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2913,7 +3008,7 @@ function BirthdayApp() {
                                                                                             children: "Preview:"
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                            lineNumber: 988,
+                                                                                            lineNumber: 1022,
                                                                                             columnNumber: 31
                                                                                         }, this),
                                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2924,24 +3019,24 @@ function BirthdayApp() {
                                                                                                 alt: ""
                                                                                             }, void 0, false, {
                                                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                                lineNumber: 990,
+                                                                                                lineNumber: 1024,
                                                                                                 columnNumber: 53
                                                                                             }, this) : formName.charAt(0) || 'A'
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                            lineNumber: 989,
+                                                                                            lineNumber: 1023,
                                                                                             columnNumber: 31
                                                                                         }, this)
                                                                                     ]
                                                                                 }, void 0, true, {
                                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                    lineNumber: 987,
+                                                                                    lineNumber: 1021,
                                                                                     columnNumber: 29
                                                                                 }, this)
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                            lineNumber: 981,
+                                                                            lineNumber: 1015,
                                                                             columnNumber: 27
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2952,7 +3047,7 @@ function BirthdayApp() {
                                                                                     children: "Ideas de Regalos"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                    lineNumber: 997,
+                                                                                    lineNumber: 1031,
                                                                                     columnNumber: 29
                                                                                 }, this),
                                                                                 [
@@ -2985,7 +3080,7 @@ function BirthdayApp() {
                                                                                                 children: label
                                                                                             }, void 0, false, {
                                                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                                lineNumber: 1004,
+                                                                                                lineNumber: 1038,
                                                                                                 columnNumber: 33
                                                                                             }, this),
                                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -2996,7 +3091,7 @@ function BirthdayApp() {
                                                                                                 className: "w-full px-3 py-2 rounded-xl text-xs font-medium border bg-slate-950 border-slate-800 text-white focus:border-rose-500 resize-y"
                                                                                             }, void 0, false, {
                                                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                                lineNumber: 1005,
+                                                                                                lineNumber: 1039,
                                                                                                 columnNumber: 33
                                                                                             }, this),
                                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3007,25 +3102,25 @@ function BirthdayApp() {
                                                                                                 className: "w-full px-3 py-2 rounded-xl text-xs font-medium border bg-slate-950 border-slate-800 text-white focus:border-rose-500"
                                                                                             }, void 0, false, {
                                                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                                lineNumber: 1008,
+                                                                                                lineNumber: 1042,
                                                                                                 columnNumber: 33
                                                                                             }, this)
                                                                                         ]
                                                                                     }, i, true, {
                                                                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                        lineNumber: 1003,
+                                                                                        lineNumber: 1037,
                                                                                         columnNumber: 31
                                                                                     }, this))
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                            lineNumber: 996,
+                                                                            lineNumber: 1030,
                                                                             columnNumber: 27
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                    lineNumber: 891,
+                                                                    lineNumber: 925,
                                                                     columnNumber: 25
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3038,7 +3133,7 @@ function BirthdayApp() {
                                                                             children: isSaving ? 'Guardando...' : isEditing ? 'Guardar Cambios' : 'Agregar Integrante'
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                            lineNumber: 1017,
+                                                                            lineNumber: 1051,
                                                                             columnNumber: 27
                                                                         }, this),
                                                                         (isEditing || formName) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -3048,30 +3143,30 @@ function BirthdayApp() {
                                                                             children: "Cancelar"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                                            lineNumber: 1022,
+                                                                            lineNumber: 1056,
                                                                             columnNumber: 29
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                    lineNumber: 1016,
+                                                                    lineNumber: 1050,
                                                                     columnNumber: 25
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                                            lineNumber: 888,
+                                                            lineNumber: 922,
                                                             columnNumber: 25
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                    lineNumber: 873,
+                                                    lineNumber: 907,
                                                     columnNumber: 23
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                lineNumber: 872,
+                                                lineNumber: 906,
                                                 columnNumber: 21
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3087,7 +3182,7 @@ function BirthdayApp() {
                                                                         children: "Integrantes en la Planilla"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                                                        lineNumber: 1036,
+                                                                        lineNumber: 1070,
                                                                         columnNumber: 27
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3095,17 +3190,17 @@ function BirthdayApp() {
                                                                         children: [
                                                                             "Total: ",
                                                                             team.length,
-                                                                            " personas"
+                                                                            " integrantes"
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                                                        lineNumber: 1037,
+                                                                        lineNumber: 1071,
                                                                         columnNumber: 27
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                lineNumber: 1035,
+                                                                lineNumber: 1069,
                                                                 columnNumber: 25
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3115,7 +3210,7 @@ function BirthdayApp() {
                                                                         className: "absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                                                        lineNumber: 1040,
+                                                                        lineNumber: 1074,
                                                                         columnNumber: 27
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -3126,19 +3221,19 @@ function BirthdayApp() {
                                                                         className: "w-full pl-10 pr-3 py-1.5 rounded-xl text-xs font-semibold outline-none border bg-slate-950 border-slate-800 text-white focus:border-rose-500"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                                                        lineNumber: 1041,
+                                                                        lineNumber: 1075,
                                                                         columnNumber: 27
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                lineNumber: 1039,
+                                                                lineNumber: 1073,
                                                                 columnNumber: 25
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                                        lineNumber: 1034,
+                                                        lineNumber: 1068,
                                                         columnNumber: 23
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3157,12 +3252,12 @@ function BirthdayApp() {
                                                                                     alt: ""
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                    lineNumber: 1055,
+                                                                                    lineNumber: 1089,
                                                                                     columnNumber: 52
                                                                                 }, this) : person.nombre.charAt(0)
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                lineNumber: 1054,
+                                                                                lineNumber: 1088,
                                                                                 columnNumber: 31
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3177,13 +3272,13 @@ function BirthdayApp() {
                                                                                                 children: person.emoji_signo
                                                                                             }, void 0, false, {
                                                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                                lineNumber: 1058,
+                                                                                                lineNumber: 1092,
                                                                                                 columnNumber: 97
                                                                                             }, this)
                                                                                         ]
                                                                                     }, void 0, true, {
                                                                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                        lineNumber: 1058,
+                                                                                        lineNumber: 1092,
                                                                                         columnNumber: 33
                                                                                     }, this),
                                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3197,7 +3292,7 @@ function BirthdayApp() {
                                                                                                 ]
                                                                                             }, void 0, true, {
                                                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                                lineNumber: 1060,
+                                                                                                lineNumber: 1094,
                                                                                                 columnNumber: 35
                                                                                             }, this),
                                                                                             person.telefono && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -3208,7 +3303,7 @@ function BirthdayApp() {
                                                                                                 ]
                                                                                             }, void 0, true, {
                                                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                                lineNumber: 1061,
+                                                                                                lineNumber: 1095,
                                                                                                 columnNumber: 55
                                                                                             }, this),
                                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -3220,25 +3315,25 @@ function BirthdayApp() {
                                                                                                 ]
                                                                                             }, void 0, true, {
                                                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                                lineNumber: 1062,
+                                                                                                lineNumber: 1096,
                                                                                                 columnNumber: 35
                                                                                             }, this)
                                                                                         ]
                                                                                     }, void 0, true, {
                                                                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                        lineNumber: 1059,
+                                                                                        lineNumber: 1093,
                                                                                         columnNumber: 33
                                                                                     }, this)
                                                                                 ]
                                                                             }, void 0, true, {
                                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                lineNumber: 1057,
+                                                                                lineNumber: 1091,
                                                                                 columnNumber: 31
                                                                             }, this)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                                                        lineNumber: 1053,
+                                                                        lineNumber: 1087,
                                                                         columnNumber: 29
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3251,12 +3346,12 @@ function BirthdayApp() {
                                                                                     className: "w-4 h-4"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                    lineNumber: 1069,
+                                                                                    lineNumber: 1103,
                                                                                     columnNumber: 33
                                                                                 }, this)
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                lineNumber: 1067,
+                                                                                lineNumber: 1101,
                                                                                 columnNumber: 31
                                                                             }, this),
                                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -3269,53 +3364,53 @@ function BirthdayApp() {
                                                                                     className: "w-4 h-4"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                    lineNumber: 1073,
+                                                                                    lineNumber: 1107,
                                                                                     columnNumber: 33
                                                                                 }, this)
                                                                             }, void 0, false, {
                                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                                lineNumber: 1071,
+                                                                                lineNumber: 1105,
                                                                                 columnNumber: 31
                                                                             }, this)
                                                                         ]
                                                                     }, void 0, true, {
                                                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                                                        lineNumber: 1066,
+                                                                        lineNumber: 1100,
                                                                         columnNumber: 29
                                                                     }, this)
                                                                 ]
                                                             }, person.id, true, {
                                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                                lineNumber: 1049,
+                                                                lineNumber: 1083,
                                                                 columnNumber: 27
                                                             }, this))
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                                        lineNumber: 1047,
+                                                        lineNumber: 1081,
                                                         columnNumber: 23
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/BirthdayApp.tsx",
-                                                lineNumber: 1033,
+                                                lineNumber: 1067,
                                                 columnNumber: 21
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/BirthdayApp.tsx",
-                                        lineNumber: 869,
+                                        lineNumber: 903,
                                         columnNumber: 19
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                    lineNumber: 868,
+                                    lineNumber: 902,
                                     columnNumber: 17
                                 }, this)
                             ]
                         }, void 0, true)
                     }, void 0, false, {
                         fileName: "[project]/components/BirthdayApp.tsx",
-                        lineNumber: 580,
+                        lineNumber: 608,
                         columnNumber: 9
                     }, this)
                 ]
@@ -3329,7 +3424,7 @@ function BirthdayApp() {
                 children: adminNotification.msg
             }, void 0, false, {
                 fileName: "[project]/components/BirthdayApp.tsx",
-                lineNumber: 1090,
+                lineNumber: 1124,
                 columnNumber: 9
             }, this),
             personToDelete && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3345,7 +3440,7 @@ function BirthdayApp() {
                                     children: "⚠️"
                                 }, void 0, false, {
                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                    lineNumber: 1104,
+                                    lineNumber: 1138,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -3353,7 +3448,7 @@ function BirthdayApp() {
                                     children: "¿Confirmas la eliminación?"
                                 }, void 0, false, {
                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                    lineNumber: 1105,
+                                    lineNumber: 1139,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -3365,20 +3460,20 @@ function BirthdayApp() {
                                             children: personToDelete.nombre
                                         }, void 0, false, {
                                             fileName: "[project]/components/BirthdayApp.tsx",
-                                            lineNumber: 1107,
+                                            lineNumber: 1141,
                                             columnNumber: 45
                                         }, this),
                                         ". Esta acción borrará permanentemente sus datos, aportes y deseos de regalo."
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                    lineNumber: 1106,
+                                    lineNumber: 1140,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/BirthdayApp.tsx",
-                            lineNumber: 1103,
+                            lineNumber: 1137,
                             columnNumber: 13
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3390,7 +3485,7 @@ function BirthdayApp() {
                                     children: "Sí, eliminar"
                                 }, void 0, false, {
                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                    lineNumber: 1111,
+                                    lineNumber: 1145,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -3402,24 +3497,24 @@ function BirthdayApp() {
                                     children: "Cancelar"
                                 }, void 0, false, {
                                     fileName: "[project]/components/BirthdayApp.tsx",
-                                    lineNumber: 1115,
+                                    lineNumber: 1149,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/BirthdayApp.tsx",
-                            lineNumber: 1110,
+                            lineNumber: 1144,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/BirthdayApp.tsx",
-                    lineNumber: 1102,
+                    lineNumber: 1136,
                     columnNumber: 11
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/BirthdayApp.tsx",
-                lineNumber: 1101,
+                lineNumber: 1135,
                 columnNumber: 9
             }, this)
         ]

@@ -511,7 +511,7 @@ export default function BirthdayApp() {
             </div>
             <div>
               <span className={`font-black text-lg ${theme==='dark'?'text-white':'text-slate-900'}`}>Cumples</span>
-              <span className="block text-[10px] text-slate-400 font-bold uppercase tracking-wider">del Mejor HUB!</span>
+              <span className="block text-[10px] text-slate-400 font-bold uppercase tracking-wider">el mejor HUB!</span>
             </div>
           </div>
           <button onClick={() => { playSoundEffect('tap'); setTheme(t => t==='dark'?'light':'dark') }}
@@ -555,25 +555,53 @@ export default function BirthdayApp() {
 
       {/* Main */}
       <main className="flex-1 flex flex-col min-h-screen overflow-y-auto pb-16 md:pb-0">
-        <header className={`px-6 lg:px-8 py-5 border-b flex items-center justify-between backdrop-blur-md z-20 ${
+        <header className={`px-6 lg:px-8 py-4 border-b flex items-center justify-between backdrop-blur-md z-20 ${
           theme==='dark'?'border-slate-800 bg-slate-900/40':'border-slate-200 bg-white/80'
         }`}>
-          <div>
+          {/* Lado izquierdo */}
+          <div className="flex items-center gap-3">
+            {/* Icono animado — solo mobile */}
+            <div className="md:hidden p-2 rounded-2xl bg-rose-500/10 text-rose-500 shrink-0">
+              <IconCake className="w-5 h-5 animate-bounce" />
+            </div>
             {selectedPersonId !== null ? (
               <button onClick={() => { playSoundEffect('tap'); setSelectedPersonId(null) }}
                 className="flex items-center gap-2 text-sm font-bold text-rose-500 bg-rose-500/10 px-4 py-2 rounded-xl">
-                <IconChevronLeft className="w-4 h-4" /><span>Volver a la Lista</span>
+                <IconChevronLeft className="w-4 h-4" /><span>Volver</span>
               </button>
             ) : (
-              <h2 className="text-xl font-black">
-                {activeTab==='home'    && 'Cumpleaños HUB'}
-                {activeTab==='regalos' && 'Centro de Regalos Colectivos'}
-                {activeTab==='planilla'&& 'Base de Datos del Equipo'}
-              </h2>
+              <div>
+                <h2 className="text-xl font-black leading-tight">
+                  {activeTab==='home'    && 'Cumples mejor HUB'}
+                  {activeTab==='regalos' && 'Centro de Regalos'}
+                  {activeTab==='planilla'&& 'Planilla del Equipo'}
+                </h2>
+                {/* Fecha — solo mobile, bajo el título */}
+                <p className="md:hidden text-[11px] text-slate-400 font-semibold mt-0.5">
+                  {new Date().getDate()} de {MONTH_NAMES[new Date().getMonth()]}
+                </p>
+              </div>
             )}
           </div>
-          <div className="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-400">
-            Mes actual: <span className="text-rose-500 font-extrabold">{MONTH_NAMES[CURRENT_MONTH-1]}</span>
+
+          {/* Lado derecho */}
+          <div className="flex items-center gap-3">
+            {/* Fecha — solo desktop */}
+            <div className="hidden md:block px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-400">
+              Mes: <span className="text-rose-500 font-extrabold">{MONTH_NAMES[CURRENT_MONTH-1]}</span>
+            </div>
+            {/* Dark mode switch — solo mobile */}
+            <button
+              onClick={() => { playSoundEffect('tap'); setTheme(t => t==='dark'?'light':'dark') }}
+              className={`md:hidden relative flex items-center w-14 h-7 rounded-full transition-colors duration-300 ${theme==='dark'?'bg-slate-700':'bg-slate-200'}`}
+              aria-label="Cambiar tema"
+            >
+              <span className={`absolute top-0.5 left-0.5 w-6 h-6 rounded-full flex items-center justify-center text-sm transition-transform duration-300 shadow ${
+                theme==='dark' ? 'translate-x-0 bg-slate-900' : 'translate-x-7 bg-white'
+              }`}>
+                {theme==='dark' ? '🌙' : '☀️'}
+              </span>
+            </button>
           </div>
         </header>
 
@@ -658,8 +686,8 @@ export default function BirthdayApp() {
                   <div className={`p-6 rounded-3xl border ${theme==='dark'?'bg-slate-900/40 border-slate-800':'bg-white border-slate-100'}`}>
                     <div className="flex items-center justify-between mb-5 pb-4 border-b border-slate-800/30">
                       <div>
-                        <h3 className="text-base font-black">Aportantes ({team.length-1-paidCount} pendientes)</h3>
-                        <p className="text-xs text-slate-400 mt-1">Haz clic para marcar/desmarcar.</p>
+                        <h3 className="text-base font-black">Aportes ({team.length-1-paidCount} pendientes)</h3>
+                        <p className="text-xs text-slate-400 mt-1">Toca para marcar/desmarcar.</p>
                       </div>
                       <button onClick={() => handleCompletarVaca(person.id)}
                         className="py-2.5 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-white font-black text-xs uppercase shadow-lg flex items-center gap-2 active:scale-95 transition-all">
@@ -704,7 +732,7 @@ export default function BirthdayApp() {
                       <p className="text-xs text-indigo-100 mt-2">Gestiona el fondo colectivo y descubre los regalos del equipo.</p>
                     </div>
                     <div className="space-y-4">
-                      <h3 className="text-xs font-black uppercase text-slate-400 tracking-widest">Cumpleañeros de {MONTH_NAMES[CURRENT_MONTH-1]} 🎉</h3>
+                      <h3 className="text-xs font-black uppercase text-slate-400 tracking-widest">Cumples de {MONTH_NAMES[CURRENT_MONTH-1]} 🎉</h3>
                       {currentMonthBirthdays.length === 0 && (
                         <p className="text-sm text-slate-400 italic">Sin cumpleaños este mes.</p>
                       )}
@@ -729,12 +757,18 @@ export default function BirthdayApp() {
                                   </div>
                                 </div>
                               </div>
-                              <div className="mt-4 pt-4 border-t border-slate-800/40 flex items-center justify-between gap-4">
-                                <div className="flex-1 h-1.5 bg-slate-800 rounded-full overflow-hidden">
-                                  <div className="h-full bg-rose-500" style={{ width: `${(paidCount/Math.max(team.length-1,1))*100}%` }} />
+                              <div className="mt-4 pt-4 border-t border-slate-800/40 space-y-2">
+                                <div className="flex items-center justify-between text-[10px] font-bold">
+                                  <span className={paidCount === team.length-1 ? 'text-emerald-400' : 'text-slate-400'}>
+                                    {paidCount}/{team.length-1} pagaron
+                                  </span>
+                                  <span className="text-slate-500">{team.length-1-paidCount} pendientes</span>
                                 </div>
-                                <div className="flex gap-2">
-                                  <button onClick={() => setSelectedPersonId(person.id)} className="px-3 py-2 rounded-xl bg-slate-800 text-slate-200 font-bold text-[11px]">Ver persona</button>
+                                <div className="flex items-center gap-3">
+                                  <div className="flex-1 h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                                    <div className={`h-full transition-all duration-500 ${totalPaid ? 'bg-emerald-500' : 'bg-rose-500'}`} style={{ width: `${(paidCount/Math.max(team.length-1,1))*100}%` }} />
+                                  </div>
+                                  <button onClick={() => setSelectedPersonId(person.id)} className="px-3 py-2 rounded-xl bg-slate-800 text-slate-200 font-bold text-[11px] shrink-0">Ver →</button>
                                 </div>
                               </div>
                             </div>
@@ -1034,7 +1068,7 @@ export default function BirthdayApp() {
                       <div className={`p-4 rounded-3xl border flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${theme==='dark'?'bg-slate-900/60 border-slate-800':'bg-white border-slate-200 shadow-xl'}`}>
                         <div>
                           <h4 className="font-black text-sm">Integrantes en la Planilla</h4>
-                          <p className="text-[10px] text-slate-400">Total: {team.length} personas</p>
+                          <p className="text-[10px] text-slate-400">Total: {team.length} integrantes</p>
                         </div>
                         <div className="relative max-w-xs flex-1">
                           <IconSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none"/>
