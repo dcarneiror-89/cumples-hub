@@ -295,7 +295,7 @@ export default function BirthdayApp() {
       try {
         const foto_url = await db.uploadFoto(editingPersonId, file)
         await db.updateFotoUrl(editingPersonId, foto_url)
-        setTeam(prev => prev.map(p => p.id === editingPersonId ? { ...p, foto_url } : p))
+        await loadData()
         showNotification('¡Foto guardada!', 'success')
       } catch {
         showNotification('Error al guardar foto', 'error')
@@ -964,7 +964,7 @@ export default function BirthdayApp() {
                                         try {
                                           await db.deleteFoto(editingPersonId)
                                           await db.updateFotoUrl(editingPersonId, null)
-                                          setTeam(prev => prev.map(p => p.id === editingPersonId ? { ...p, foto_url: null } : p))
+                                          await loadData()
                                           showNotification('Foto eliminada', 'info')
                                         } catch {
                                           showNotification('Error al eliminar foto', 'error')
