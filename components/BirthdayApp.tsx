@@ -494,6 +494,17 @@ export default function BirthdayApp() {
     )
   }
 
+  // ── Theme helpers ──────────────────────────────────────────
+  const tCard    = theme==='dark' ? 'bg-slate-900 border-slate-800'          : 'bg-white border-slate-200 shadow-sm'
+  const tCardSub = theme==='dark' ? 'bg-slate-900/40 border-slate-800'       : 'bg-slate-50 border-slate-200'
+  const tInput   = theme==='dark' ? 'bg-slate-950 border-slate-800 text-white placeholder-slate-500' : 'bg-white border-slate-300 text-slate-800 placeholder-slate-400'
+  const tInputDis= theme==='dark' ? 'bg-slate-950/40 border-slate-800 text-slate-300' : 'bg-slate-100 border-slate-200 text-slate-500'
+  const tPill    = theme==='dark' ? 'bg-slate-800 text-slate-400'            : 'bg-slate-100 text-slate-600'
+  const tListItem= theme==='dark' ? 'bg-slate-900/50 hover:bg-slate-900 border-slate-800' : 'bg-white hover:bg-slate-50 border-slate-200 shadow-sm'
+  const tInner   = theme==='dark' ? 'bg-slate-950/60'                        : 'bg-slate-100/80'
+  const tDivider = theme==='dark' ? 'border-slate-800/40'                    : 'border-slate-200'
+  const tLabel   = theme==='dark' ? 'text-slate-400'                         : 'text-slate-500'
+
   // ── RENDER ─────────────────────────────────────────────────
   return (
     <div className={`min-h-screen font-sans antialiased selection:bg-rose-500 selection:text-white transition-colors duration-300 ${
@@ -587,7 +598,7 @@ export default function BirthdayApp() {
           {/* Lado derecho */}
           <div className="flex items-center gap-3">
             {/* Fecha — solo desktop */}
-            <div className="hidden md:block px-4 py-2 rounded-xl text-xs font-semibold bg-slate-900 text-slate-400">
+            <div className={`hidden md:block px-4 py-2 rounded-xl text-xs font-semibold ${tPill}`}>
               Mes: <span className="text-rose-500 font-extrabold">{MONTH_NAMES[CURRENT_MONTH-1]}</span>
             </div>
             {/* Dark mode switch — solo mobile */}
@@ -620,10 +631,9 @@ export default function BirthdayApp() {
                 <div className="lg:col-span-5 space-y-6">
                   <div className={`p-6 rounded-3xl border shadow-xl ${theme==='dark'?'bg-slate-900 border-slate-800':'bg-white border-slate-100'}`}>
                     <div className="flex items-center gap-5">
-                      <div className={`w-20 h-20 rounded-2xl bg-gradient-to-tr ${person.color} flex items-center justify-center text-white font-extrabold text-2xl shadow-md overflow-hidden shrink-0`}>
-                        {person.foto_url
-                          ? <img src={person.foto_url} className="w-full h-full object-cover" alt={person.nombre} />
-                          : person.nombre.charAt(0)}
+                      <div className={`w-20 h-20 rounded-2xl bg-gradient-to-tr ${person.color || 'from-slate-400 to-slate-600'} flex items-center justify-center text-white font-extrabold text-2xl shadow-md overflow-hidden shrink-0 relative`}>
+                        {person.nombre.charAt(0)}
+                        {person.foto_url && <img src={person.foto_url} className="absolute inset-0 w-full h-full object-cover" alt={person.nombre} onError={(e) => { (e.target as HTMLImageElement).style.display='none' }}/>}
                       </div>
                       <div className="space-y-1">
                         <span className="text-xs uppercase tracking-wider text-rose-500 font-extrabold">Fondo Colectivo</span>
@@ -700,17 +710,16 @@ export default function BirthdayApp() {
                         return (
                           <div key={contributor.id} onClick={() => handleTogglePayment(person.id, contributor.id)}
                             className={`p-3 rounded-2xl flex items-center justify-between border cursor-pointer transition-all active:scale-98 ${
-                              hasPaid ? 'bg-emerald-500/5 border-emerald-500/20' : 'bg-slate-900/20 border-slate-800'
+                              hasPaid ? 'bg-emerald-500/5 border-emerald-500/20' : `${tCardSub}`
                             }`}>
                             <div className="flex items-center gap-3">
-                              <div className={`w-9 h-9 rounded-xl bg-gradient-to-tr ${contributor.color} flex items-center justify-center text-white text-xs font-bold shrink-0 overflow-hidden`}>
-                                {contributor.foto_url
-                                  ? <img src={contributor.foto_url} className="w-full h-full object-cover" alt="" />
-                                  : contributor.nombre.charAt(0)}
+                              <div className={`w-9 h-9 rounded-xl bg-gradient-to-tr ${contributor.color || 'from-slate-400 to-slate-600'} flex items-center justify-center text-white text-xs font-bold shrink-0 overflow-hidden relative`}>
+                                {contributor.nombre.charAt(0)}
+                                {contributor.foto_url && <img src={contributor.foto_url} className="absolute inset-0 w-full h-full object-cover" alt="" onError={(e) => { (e.target as HTMLImageElement).style.display='none' }}/>}
                               </div>
                               <span className="text-sm font-semibold truncate max-w-[100px]">{contributor.nombre}</span>
                             </div>
-                            <span className={`px-2.5 py-1.5 rounded-xl text-[10px] font-black ${hasPaid?'bg-emerald-500/15 text-emerald-400':'bg-slate-800 text-slate-400'}`}>
+                            <span className={`px-2.5 py-1.5 rounded-xl text-[10px] font-black ${hasPaid?'bg-emerald-500/15 text-emerald-400':tPill}`}>
                               {hasPaid?'PAGÓ':'FALTA'}
                             </span>
                           </div>
@@ -742,33 +751,34 @@ export default function BirthdayApp() {
                           const totalPaid  = isFullyPaid(person.id)
                           const primaryGift = person.regalo_ideas[0]?.descripcion || 'Sorpresa ✨'
                           return (
-                            <div key={person.id} className={`relative rounded-3xl border p-6 transition-all ${celebratedId===person.id?'scale-102 ring-2 ring-rose-500':'bg-slate-900 border-slate-800'}`}>
+                            <div key={person.id} className={`relative rounded-3xl border p-6 transition-all ${celebratedId===person.id?'scale-102 ring-2 ring-rose-500':tCard}`}>
                               {totalPaid && <span className="absolute top-4 right-4 bg-emerald-500 text-white font-black text-[9px] px-2.5 py-1 rounded-full">COMPRADO ✅</span>}
                               <div className="flex items-start gap-4">
-                                <div className={`w-14 h-16 rounded-2xl bg-gradient-to-tr ${person.color} flex items-center justify-center text-white text-2xl font-extrabold shadow-md overflow-hidden shrink-0`}>
-                                  {person.foto_url ? <img src={person.foto_url} className="w-full h-full object-cover" alt="" /> : person.nombre.charAt(0)}
+                                <div className={`w-14 h-16 rounded-2xl bg-gradient-to-tr ${person.color || 'from-slate-400 to-slate-600'} flex items-center justify-center text-white text-2xl font-extrabold shadow-md overflow-hidden shrink-0 relative`}>
+                                  {person.nombre.charAt(0)}
+                                  {person.foto_url && <img src={person.foto_url} className="absolute inset-0 w-full h-full object-cover" alt="" onError={(e) => { (e.target as HTMLImageElement).style.display='none' }}/>}
                                 </div>
                                 <div className="flex-1 space-y-1 overflow-hidden">
                                   <h3 className="font-black text-lg truncate">{person.nombre} <span>{person.emoji_signo}</span></h3>
                                   <p className="text-xs text-rose-400 font-bold">📅 {person.dia} de {MONTH_NAMES[person.mes-1]} | {person.signo}</p>
-                                  <div className="mt-3 p-3 rounded-2xl bg-slate-950/60">
-                                    <span className="block text-[8px] font-bold text-slate-400 uppercase mb-1">Regalo Principal:</span>
+                                  <div className={`mt-3 p-3 rounded-2xl ${tInner}`}>
+                                    <span className={`block text-[8px] font-bold uppercase mb-1 ${tLabel}`}>Regalo Principal:</span>
                                     <span className="text-xs font-semibold truncate block">🎁 {primaryGift}</span>
                                   </div>
                                 </div>
                               </div>
-                              <div className="mt-4 pt-4 border-t border-slate-800/40 space-y-2">
+                              <div className={`mt-4 pt-4 border-t ${tDivider} space-y-2`}>
                                 <div className="flex items-center justify-between text-[10px] font-bold">
-                                  <span className={paidCount === team.length-1 ? 'text-emerald-400' : 'text-slate-400'}>
+                                  <span className={paidCount === team.length-1 ? 'text-emerald-400' : tLabel}>
                                     {paidCount}/{team.length-1} pagaron
                                   </span>
-                                  <span className="text-slate-500">{team.length-1-paidCount} pendientes</span>
+                                  <span className={tLabel}>{team.length-1-paidCount} pendientes</span>
                                 </div>
                                 <div className="flex items-center gap-3">
-                                  <div className="flex-1 h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                                  <div className={`flex-1 h-1.5 rounded-full overflow-hidden ${theme==='dark'?'bg-slate-800':'bg-slate-200'}`}>
                                     <div className={`h-full transition-all duration-500 ${totalPaid ? 'bg-emerald-500' : 'bg-rose-500'}`} style={{ width: `${(paidCount/Math.max(team.length-1,1))*100}%` }} />
                                   </div>
-                                  <button onClick={() => setSelectedPersonId(person.id)} className="px-3 py-2 rounded-xl bg-slate-800 text-slate-200 font-bold text-[11px] shrink-0">Ver →</button>
+                                  <button onClick={() => setSelectedPersonId(person.id)} className={`px-3 py-2 rounded-xl font-bold text-[11px] shrink-0 ${tPill}`}>Ver →</button>
                                 </div>
                               </div>
                             </div>
@@ -778,8 +788,8 @@ export default function BirthdayApp() {
                     </div>
                   </div>
                   <div className="xl:col-span-4 space-y-6">
-                    <div className="p-5 rounded-3xl border bg-slate-900 border-slate-800 space-y-3">
-                      <h4 className="text-xs font-black uppercase text-slate-400">Resumen del Año 📊</h4>
+                    <div className={`p-5 rounded-3xl border ${tCard} space-y-3`}>
+                      <h4 className={`text-xs font-black uppercase ${tLabel}`}>Resumen del Año 📊</h4>
 
                       {/* Cumpleaños ya pasados */}
                       <div className="p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center gap-3">
@@ -820,13 +830,17 @@ export default function BirthdayApp() {
                       </div>
                     </div>
                     <div className="space-y-3">
-                      <h4 className="text-xs font-black uppercase text-slate-400">Próximos Cumpleaños ⏳</h4>
-                      {team.filter(p => p.mes !== CURRENT_MONTH).slice(0,5).map(p => (
+                      <h4 className="text-xs font-black uppercase text-slate-400">Cumples el próximo mes ⏳</h4>
+                      {team.filter(p => p.mes === (CURRENT_MONTH % 12) + 1).length === 0 && (
+                        <p className="text-sm text-slate-400 italic">Sin cumpleaños el próximo mes.</p>
+                      )}
+                      {team.filter(p => p.mes === (CURRENT_MONTH % 12) + 1).sort((a,b) => a.dia - b.dia).map(p => (
                         <div key={p.id} onClick={() => setSelectedPersonId(p.id)}
-                          className="p-3 rounded-2xl flex items-center justify-between border bg-slate-900/50 hover:bg-slate-900 border-slate-800 cursor-pointer">
+                          className={`p-3 rounded-2xl flex items-center justify-between border cursor-pointer ${tListItem}`}>
                           <div className="flex items-center gap-3">
-                            <div className={`w-9 h-9 rounded-xl bg-gradient-to-tr ${p.color} flex items-center justify-center text-white font-bold text-xs shrink-0 overflow-hidden`}>
-                              {p.foto_url ? <img src={p.foto_url} className="w-full h-full object-cover" alt=""/> : p.nombre.charAt(0)}
+                            <div className={`w-9 h-9 rounded-xl bg-gradient-to-tr ${p.color || 'from-slate-400 to-slate-600'} flex items-center justify-center text-white font-bold text-xs shrink-0 overflow-hidden relative`}>
+                              {p.nombre.charAt(0)}
+                              {p.foto_url && <img src={p.foto_url} className="absolute inset-0 w-full h-full object-cover" alt="" onError={(e) => { (e.target as HTMLImageElement).style.display='none' }}/>}
                             </div>
                             <div><p className="text-sm font-bold">{p.nombre}</p><p className="text-[10px] text-slate-400">{p.dia} de {MONTH_NAMES[p.mes-1]}</p></div>
                           </div>
@@ -846,12 +860,12 @@ export default function BirthdayApp() {
                       <IconSearch className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400 pointer-events-none"/>
                       <input type="text" placeholder="Buscar integrante..." value={searchQuery}
                         onChange={e => setSearchQuery(e.target.value)}
-                        className="w-full pl-12 pr-4 py-[11px] rounded-2xl text-sm font-semibold outline-none border bg-slate-950 border-slate-800 text-white focus:border-rose-500"/>
+                        className={`w-full pl-12 pr-4 py-[11px] rounded-2xl text-sm font-semibold outline-none border focus:border-rose-500 ${tInput}`}/>
                     </div>
                     <div className="flex items-center gap-2">
                       {(['todos','pendientes','completados'] as const).map(f => (
                         <button key={f} onClick={() => setStatusFilter(f)}
-                          className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${statusFilter===f?'bg-rose-500 text-white':'bg-slate-800 text-slate-400'}`}>
+                          className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${statusFilter===f?'bg-rose-500 text-white':tPill}`}>
                           {f==='todos'?'Todos':f==='pendientes'?'Pendientes ⏳':'Listos ✅'}
                         </button>
                       ))}
@@ -865,23 +879,24 @@ export default function BirthdayApp() {
                       const primaryGift = person.regalo_ideas[0]?.descripcion || 'Sorpresa general'
                       return (
                         <div key={person.id} onClick={() => { playSoundEffect('tap'); setSelectedPersonId(person.id) }}
-                          className="p-5 rounded-3xl border bg-slate-900 border-slate-800 hover:bg-slate-850 cursor-pointer flex flex-col justify-between min-h-[220px]">
+                          className={`p-5 rounded-3xl border cursor-pointer flex flex-col justify-between min-h-[220px] transition-all ${tCard}`}>
                           <div className="space-y-4">
                             <div className="flex items-center gap-3">
-                              <div className={`w-10 h-10 rounded-xl bg-gradient-to-tr ${person.color} flex items-center justify-center text-white text-sm font-black shrink-0 overflow-hidden`}>
-                                {person.foto_url ? <img src={person.foto_url} className="w-full h-full object-cover" alt=""/> : person.nombre.charAt(0)}
+                              <div className={`w-10 h-10 rounded-xl bg-gradient-to-tr ${person.color || 'from-slate-400 to-slate-600'} flex items-center justify-center text-white text-sm font-black shrink-0 overflow-hidden relative`}>
+                                {person.nombre.charAt(0)}
+                                {person.foto_url && <img src={person.foto_url} className="absolute inset-0 w-full h-full object-cover" alt="" onError={(e) => { (e.target as HTMLImageElement).style.display='none' }}/>}
                               </div>
                               <div>
                                 <h3 className="text-sm font-extrabold">{person.nombre} <span>{person.emoji_signo}</span></h3>
                                 <p className="text-[10px] text-slate-400">{person.dia} de {MONTH_NAMES[person.mes-1]}</p>
                               </div>
                             </div>
-                            <div className="p-3 rounded-2xl text-[11px] bg-slate-950/80 text-slate-300">
-                              <span className="block text-[8px] font-bold text-slate-400 uppercase mb-1">Deseo Principal:</span>
+                            <div className={`p-3 rounded-2xl text-[11px] ${tInner}`}>
+                              <span className={`block text-[8px] font-bold uppercase mb-1 ${tLabel}`}>Deseo Principal:</span>
                               <p className="truncate font-medium">🎁 {primaryGift}</p>
                             </div>
                           </div>
-                          <div className="mt-5 pt-4 border-t border-slate-800/40 space-y-2">
+                          <div className={`mt-5 pt-4 border-t ${tDivider} space-y-2`}>
                             <div className="w-full h-1 bg-slate-800 rounded-full overflow-hidden">
                               <div className="h-full bg-rose-500" style={{ width:`${progress}%` }}/>
                             </div>
@@ -909,10 +924,12 @@ export default function BirthdayApp() {
                         <button
                           type="button"
                           onClick={() => setFormExpanded(v => !v)}
-                          className="lg:pointer-events-none w-full flex items-center justify-between gap-3 p-6 pb-3"
+                          className="lg:pointer-events-none w-full flex items-center justify-between gap-3 px-5 py-4"
                         >
                           <div className="flex items-center gap-3">
-                            {isEditing ? <IconEdit className="text-rose-500 w-5 h-5"/> : <IconUserAdd className="text-rose-500 w-5 h-5"/>}
+                            <div className="p-2 rounded-xl bg-rose-500/10 shrink-0">
+                              {isEditing ? <IconEdit className="text-rose-500 w-4 h-4"/> : <IconUserAdd className="text-rose-500 w-4 h-4"/>}
+                            </div>
                             <h4 className="font-black text-base">{isEditing?'Editar Integrante':'Agregar Integrante'}</h4>
                           </div>
                           <IconChevronRight className={`lg:hidden w-5 h-5 text-slate-400 transition-transform duration-200 ${formExpanded || isEditing ? 'rotate-90' : ''}`}/>
@@ -920,7 +937,7 @@ export default function BirthdayApp() {
 
                         {/* Contenido: siempre visible en desktop, plegable en mobile */}
                         <div className={`${(formExpanded || isEditing) ? 'block' : 'hidden'} lg:block px-6 pb-6`}>
-                        <div className="pt-3 border-t border-slate-800/30 mb-5"/>
+                        <div className={`pt-3 border-t mb-5 ${tDivider}`}/>
 
                         <div className="space-y-4">
                           {/* Nombre */}
@@ -928,7 +945,7 @@ export default function BirthdayApp() {
                             <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">Nombre</label>
                             <input type="text" required placeholder="Ej. Francisca" value={formName}
                               onChange={e => setFormName(e.target.value)}
-                              className="w-full px-4 py-[11px] rounded-xl text-sm font-semibold outline-none border bg-slate-950 border-slate-800 text-white focus:border-rose-500"/>
+                              className={`w-full px-4 py-[11px] rounded-xl text-sm font-semibold outline-none border focus:border-rose-500 ${tInput}`}/>
                           </div>
 
                           {/* Fecha */}
@@ -937,12 +954,12 @@ export default function BirthdayApp() {
                               <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">Día</label>
                               <input type="number" required min={1} max={31} value={formDay}
                                 onChange={e => setFormDay(Math.max(1, Math.min(31, parseInt(e.target.value)||1)))}
-                                className="w-full px-4 py-[11px] rounded-xl text-sm font-semibold outline-none border bg-slate-950 border-slate-800 text-white focus:border-rose-500"/>
+                                className={`w-full px-4 py-[11px] rounded-xl text-sm font-semibold outline-none border focus:border-rose-500 ${tInput}`}/>
                             </div>
                             <div>
                               <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">Mes</label>
                               <select value={formMonth} onChange={e => setFormMonth(parseInt(e.target.value))}
-                                className="w-full px-4 py-[11px] rounded-xl text-sm font-semibold outline-none border bg-slate-950 border-slate-800 text-white focus:border-rose-500">
+                                className={`w-full px-4 py-[11px] rounded-xl text-sm font-semibold outline-none border focus:border-rose-500 ${tInput}`}>
                                 {MONTH_NAMES.map((n,i) => <option key={i+1} value={i+1}>{n}</option>)}
                               </select>
                             </div>
@@ -953,12 +970,12 @@ export default function BirthdayApp() {
                             <div>
                               <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">Signo (auto)</label>
                               <input type="text" disabled value={formSign}
-                                className="w-full px-4 py-2.5 rounded-xl text-xs font-semibold outline-none border bg-slate-950/40 border-slate-800 text-slate-300"/>
+                                className={`w-full px-4 py-2.5 rounded-xl text-xs font-semibold outline-none border ${tInputDis}`}/>
                             </div>
                             <div>
                               <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">Emoji</label>
                               <input type="text" disabled value={formEmoji}
-                                className="w-full px-4 py-2.5 rounded-xl text-center text-sm outline-none border bg-slate-950/40 border-slate-800 text-white"/>
+                                className={`w-full px-4 py-2.5 rounded-xl text-center text-sm outline-none border ${tInputDis}`}/>
                             </div>
                           </div>
 
@@ -967,7 +984,7 @@ export default function BirthdayApp() {
                             <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">Teléfono (opcional)</label>
                             <input type="tel" placeholder="+56 9 1234 5678" value={formPhone}
                               onChange={e => setFormPhone(e.target.value)}
-                              className="w-full px-4 py-[11px] rounded-xl text-sm font-semibold outline-none border bg-slate-950 border-slate-800 text-white focus:border-rose-500"/>
+                              className={`w-full px-4 py-[11px] rounded-xl text-sm font-semibold outline-none border focus:border-rose-500 ${tInput}`}/>
                           </div>
 
                           {/* Foto */}
@@ -975,15 +992,15 @@ export default function BirthdayApp() {
                             <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1.5">Foto de Perfil</label>
                             <div onDragOver={handleDragOver} onDragLeave={handleDragLeave} onDrop={handleDrop}
                               className={`p-4 rounded-2xl border-2 border-dashed transition-all flex items-center gap-4 ${
-                                isDragging ? 'border-rose-500 bg-rose-500/10 scale-[1.02]' : 'border-slate-800 bg-slate-955/20 hover:border-slate-700'
+                                isDragging ? 'border-rose-500 bg-rose-500/10 scale-[1.02]' : `${theme==='dark'?'border-slate-700 bg-slate-900/20 hover:border-slate-600':'border-slate-300 bg-slate-50 hover:border-slate-400'}`
                               }`}>
-                              <div className="w-16 h-16 rounded-2xl bg-slate-950 border border-slate-800 flex items-center justify-center overflow-hidden shrink-0">
+                              <div className={`w-16 h-16 rounded-2xl border flex items-center justify-center overflow-hidden shrink-0 ${theme==='dark'?'bg-slate-900 border-slate-800':'bg-slate-100 border-slate-200'}`}>
                                 {formPhotoPreview
                                   ? <img src={formPhotoPreview} className="w-full h-full object-cover" alt="preview"/>
-                                  : <IconCamera className={`w-6 h-6 ${isDragging?'text-rose-500 animate-bounce':'text-slate-600'}`}/>}
+                                  : <IconCamera className={`w-6 h-6 ${isDragging?'text-rose-500 animate-bounce':tLabel}`}/>}
                               </div>
                               <div className="flex-1 space-y-2">
-                                <p className="text-xs font-bold text-slate-300">{isDragging?'¡Suelta la foto aquí!':'Arrastra o selecciona una foto'}</p>
+                                <p className={`text-xs font-bold ${tLabel}`}>{isDragging?'¡Suelta la foto aquí!':'Arrastra o selecciona una foto'}</p>
                                 <div className="flex items-center gap-2">
                                   <input type="file" accept="image/*" id="photo-upload" onChange={e => { if(e.target.files?.[0]) handlePhotoSelect(e.target.files[0]) }} className="hidden"/>
                                   <label htmlFor="photo-upload" className="px-3.5 py-1.5 bg-rose-500/10 text-rose-400 hover:bg-rose-500/20 rounded-xl text-[11px] font-extrabold border border-rose-500/20 cursor-pointer">
@@ -1015,46 +1032,46 @@ export default function BirthdayApp() {
                           <div>
                             <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block mb-1">Color de Avatar</label>
                             <select value={formColor} onChange={e => setFormColor(e.target.value)}
-                              className="w-full px-4 py-[11px] rounded-xl text-xs font-semibold outline-none border bg-slate-950 border-slate-800 text-white focus:border-rose-500">
+                              className={`w-full px-4 py-[11px] rounded-xl text-xs font-semibold outline-none border focus:border-rose-500 ${tInput}`}>
                               {PRESET_COLORS.map((c,i) => <option key={i} value={c.value}>{c.name}</option>)}
                             </select>
                             <div className="flex items-center gap-2 mt-2 pl-1">
                               <span className="text-[10px] text-slate-400">Preview:</span>
-                              <div className={`w-6 h-6 rounded-lg bg-gradient-to-tr ${formColor} flex items-center justify-center text-white text-xs font-black overflow-hidden`}>
+                              <div className={`w-6 h-6 rounded-lg bg-gradient-to-tr ${formColor} flex items-center justify-center text-white text-xs font-black overflow-hidden relative`}>
                                 {formPhotoPreview ? <img src={formPhotoPreview} className="w-full h-full object-cover" alt=""/> : (formName.charAt(0)||'A')}
                               </div>
                             </div>
                           </div>
 
                           {/* Regalos */}
-                          <div className="space-y-4 pt-2 border-t border-slate-800/40">
+                          <div className={`space-y-4 pt-2 border-t ${tDivider}`}>
                             <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">Ideas de Regalos</label>
                             {[
                               [formGiftText1,setFormGiftText1,formGiftLink1,setFormGiftLink1,'Regalo 1'],
                               [formGiftText2,setFormGiftText2,formGiftLink2,setFormGiftLink2,'Regalo 2'],
                               [formGiftText3,setFormGiftText3,formGiftLink3,setFormGiftLink3,'Regalo 3'],
                             ].map(([text,setText,link,setLink,label],i) => (
-                              <div key={i} className="p-3 rounded-2xl border border-slate-800 bg-slate-950/20 space-y-2">
+                              <div key={i} className={`p-3 rounded-2xl border space-y-2 ${tCardSub}`}>
                                 <span className="text-[10px] font-bold text-rose-400 block">{label as string}</span>
                                 <textarea rows={3} placeholder="Descripción del regalo..." value={text as string}
                                   onChange={e => (setText as (v:string)=>void)(e.target.value)}
-                                  className="w-full px-3 py-2 rounded-xl text-xs font-medium border bg-slate-950 border-slate-800 text-white focus:border-rose-500 resize-y"/>
+                                  className={`w-full px-3 py-2 rounded-xl text-xs font-medium border focus:border-rose-500 resize-y ${tInput}`}/>
                                 <input type="text" placeholder="URL del regalo (opcional)..." value={link as string}
                                   onChange={e => (setLink as (v:string)=>void)(e.target.value)}
-                                  className="w-full px-3 py-2 rounded-xl text-xs font-medium border bg-slate-950 border-slate-800 text-white focus:border-rose-500"/>
+                                  className={`w-full px-3 py-2 rounded-xl text-xs font-medium border focus:border-rose-500 ${tInput}`}/>
                               </div>
                             ))}
                           </div>
                         </div>
 
-                        <div className="flex gap-2 mt-6 pt-4 border-t border-slate-800/30">
+                        <div className={`flex gap-2 mt-6 pt-4 border-t ${tDivider}`}>
                           <button type="submit" disabled={isSaving}
                             className="flex-1 py-2.5 rounded-xl bg-rose-500 hover:bg-rose-600 disabled:opacity-60 text-white font-extrabold text-xs uppercase tracking-wider shadow-md transition-all active:scale-95">
                             {isSaving ? 'Guardando...' : (isEditing?'Guardar Cambios':'Agregar Integrante')}
                           </button>
                           {(isEditing || formName) && (
                             <button type="button" onClick={resetForm}
-                              className="px-4 py-2.5 rounded-xl text-xs font-bold bg-slate-800 text-slate-400 hover:bg-slate-700">
+                              className={`px-4 py-2.5 rounded-xl text-xs font-bold ${tPill}`}>
                               Cancelar
                             </button>
                           )}
@@ -1071,10 +1088,10 @@ export default function BirthdayApp() {
                           <p className="text-[10px] text-slate-400">Total: {team.length} integrantes</p>
                         </div>
                         <div className="relative max-w-xs flex-1">
-                          <IconSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none"/>
+                          <IconSearch className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none"/>
                           <input type="text" placeholder="Buscar..." value={searchAdminQuery}
                             onChange={e => setSearchAdminQuery(e.target.value)}
-                            className="w-full pl-10 pr-3 py-1.5 rounded-xl text-xs font-semibold outline-none border bg-slate-950 border-slate-800 text-white focus:border-rose-500"/>
+                            className={`w-full pl-11 pr-4 py-[11px] rounded-xl text-sm font-semibold outline-none border focus:border-rose-500 ${tInput}`}/>
                         </div>
                       </div>
 
@@ -1082,11 +1099,12 @@ export default function BirthdayApp() {
                         {filteredAdminTeam.map(person => (
                           <div key={person.id}
                             className={`p-4 rounded-3xl border flex items-center justify-between transition-all ${
-                              editingPersonId===person.id ? 'border-rose-500 bg-rose-500/5' : 'bg-slate-900/40 border-slate-800 hover:bg-slate-900'
+                              editingPersonId===person.id ? 'border-rose-500 bg-rose-500/5' : `${tCardSub} hover:opacity-90`
                             }`}>
                             <div className="flex items-center gap-4 min-w-0">
-                              <div className={`w-11 h-11 rounded-2xl bg-gradient-to-tr ${person.color} flex items-center justify-center text-white font-black text-sm shadow-md shrink-0 overflow-hidden`}>
-                                {person.foto_url ? <img src={person.foto_url} className="w-full h-full object-cover" alt=""/> : person.nombre.charAt(0)}
+                              <div className={`w-11 h-11 rounded-2xl bg-gradient-to-tr ${person.color || 'from-slate-400 to-slate-600'} flex items-center justify-center text-white font-black text-sm shadow-md shrink-0 overflow-hidden relative`}>
+                                {person.nombre.charAt(0)}
+                                {person.foto_url && <img src={person.foto_url} className="absolute inset-0 w-full h-full object-cover" alt="" onError={(e) => { (e.target as HTMLImageElement).style.display='none' }}/>}
                               </div>
                               <div className="min-w-0 space-y-0.5">
                                 <h5 className="font-extrabold text-sm truncate">{person.nombre} <span>{person.emoji_signo}</span></h5>
@@ -1099,11 +1117,11 @@ export default function BirthdayApp() {
                             </div>
                             <div className="flex items-center gap-1.5 shrink-0 pl-3">
                               <button onClick={() => handleStartEdit(person)}
-                                className="p-2 rounded-xl border bg-slate-800/50 border-slate-700 text-rose-400 hover:text-rose-300 transition-all hover:scale-105">
+                                className={`p-2 rounded-xl border text-rose-400 hover:text-rose-500 transition-all hover:scale-105 ${tPill}`}>
                                 <IconEdit className="w-4 h-4"/>
                               </button>
                               <button onClick={() => { playSoundEffect('tap'); setPersonToDelete(person) }}
-                                className="p-2 rounded-xl border bg-slate-850/50 border-slate-800 text-rose-500/70 hover:text-rose-500 hover:bg-rose-500/10 transition-all hover:scale-105">
+                                className={`p-2 rounded-xl border text-rose-500/70 hover:text-rose-500 hover:bg-rose-500/10 transition-all hover:scale-105 ${tPill}`}>
                                 <IconTrash className="w-4 h-4"/>
                               </button>
                             </div>
